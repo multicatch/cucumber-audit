@@ -6,11 +6,19 @@ import io.cucumber.guice.CucumberModules.createScenarioModule
 import io.cucumber.guice.InjectorSource
 import io.cucumber.junit.Cucumber
 import io.cucumber.junit.CucumberOptions
+import org.junit.AfterClass
 import org.junit.runner.RunWith
+
 
 @RunWith(Cucumber::class)
 @CucumberOptions(plugin = ["pretty"], strict = false)
-class CucumberTest
+object CucumberTest {
+    @AfterClass
+    @JvmStatic
+    fun teardown() {
+        auditContext.driver.quit()
+    }
+}
 
 val auditContext: AuditContext = auditContextOf(DriverType.GECKO)
 
