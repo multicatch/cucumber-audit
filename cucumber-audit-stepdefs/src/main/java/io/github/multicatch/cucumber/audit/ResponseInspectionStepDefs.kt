@@ -15,18 +15,33 @@ class ResponseInspectionStepDefs @Inject constructor(
             auditContext.proxy.newHar()
         }
 
-        Then("a {string} response header should contain {string}") { header: String, value: String ->
+        Then("the {string} response header should contain {string}") { header: String, value: String ->
             auditContext.proxy.har
                     .log
                     .entries
-                    .mapNotNull {
-                        it.response.headers
+                    .mapNotNull { entry ->
+                        entry.response.headers
                                 .map { it.name to it.value }
                                 .toMap()[header]
                     }
                     .also { headers ->
                         Assertions.assertThat(headers)
                                 .anyMatch { it.contains(value) }
+                    }
+        }
+
+        Then("the {string} response header should not contain numbers") { header: String ->
+            auditContext.proxy.har
+                    .log
+                    .entries
+                    .mapNotNull { entry ->
+                        entry.response.headers
+                                .map { it.name to it.value }
+                                .toMap()[header]
+                    }
+                    .also { headers ->
+                        Assertions.assertThat(headers)
+                                .noneMatch { it.contains(Regex("[0-9]+")) }
                     }
         }
     }
