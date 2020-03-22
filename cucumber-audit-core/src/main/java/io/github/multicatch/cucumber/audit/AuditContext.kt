@@ -1,8 +1,13 @@
 package io.github.multicatch.cucumber.audit
 
+import io.netty.handler.codec.http.HttpMethod
+import io.netty.handler.codec.http.HttpRequest
 import net.lightbody.bmp.BrowserMobProxy
 import net.lightbody.bmp.BrowserMobProxyServer
 import net.lightbody.bmp.client.ClientUtil
+import net.lightbody.bmp.filters.RequestFilter
+import net.lightbody.bmp.util.HttpMessageContents
+import net.lightbody.bmp.util.HttpMessageInfo
 import org.openqa.selenium.Proxy
 import org.openqa.selenium.chrome.ChromeDriver
 import org.openqa.selenium.chrome.ChromeOptions
@@ -15,6 +20,8 @@ import org.openqa.selenium.remote.RemoteWebDriver
 interface AuditContext {
     val proxy: BrowserMobProxy
     val driver: RemoteWebDriver
+
+    var method: HttpMethod?
 }
 
 @JvmOverloads
@@ -31,6 +38,8 @@ class DefaultAuditContext
     override val proxy: BrowserMobProxy = BrowserMobProxyServer()
     override val driver: RemoteWebDriver = createDriver(proxy, type, driverLocation)
 
+    override var method: HttpMethod? = null
+
     private fun createDriver(
             proxy: BrowserMobProxy,
             type: DriverType,
@@ -39,6 +48,7 @@ class DefaultAuditContext
         proxy.setTrustAllServers(true)
         proxy.start(0)
         proxy.setHarCaptureTypes(setOf())
+        proxy.addRequestFilter(requestFilter())
 
         if (driverLocation != null) {
             System.setProperty(type.driverLocationProperty, driverLocation)
@@ -56,6 +66,14 @@ class DefaultAuditContext
         setProxy(seleniumProxy)
         setCapability(CapabilityType.PROXY, seleniumProxy)
         setCapability(CapabilityType.ACCEPT_SSL_CERTS, seleniumProxy)
+    }
+
+    private fun requestFilter() = RequestFilter() { httpRequest: HttpRequest, _: HttpMessageContents, _: HttpMessageInfo ->
+        if (method != null) {
+            httpRequest.method = method
+        }
+
+        null
     }
 }
 

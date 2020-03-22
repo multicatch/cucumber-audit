@@ -15,6 +15,11 @@ class ResponseInspectionStepDefs @Inject constructor(
             auditContext.proxy.newHar()
         }
 
+        Given("the response content is under inspection") {
+            auditContext.proxy.enableHarCaptureTypes(CaptureType.RESPONSE_CONTENT)
+            auditContext.proxy.newHar()
+        }
+
         Then("the {string} response header should contain {string}") { header: String, value: String ->
             auditContext.proxy.har
                     .log
@@ -42,6 +47,33 @@ class ResponseInspectionStepDefs @Inject constructor(
                     .also { headers ->
                         Assertions.assertThat(headers)
                                 .noneMatch { it.contains(Regex("[0-9]+")) }
+                    }
+        }
+
+        Then("the response should not contain {string}") { value: String ->
+            auditContext.proxy.har
+                    .log
+                    .entries
+                    .mapNotNull { entry ->
+                        entry.response.content.text
+                    }
+                    .also { contents ->
+                        Assertions.assertThat(contents)
+                                .noneMatch { it.contains(value) }
+                    }
+        }
+
+
+        Then("the response should not match {string}") { regex: String ->
+            auditContext.proxy.har
+                    .log
+                    .entries
+                    .mapNotNull { entry ->
+                        entry.response.content.text
+                    }
+                    .also { contents ->
+                        Assertions.assertThat(contents)
+                                .noneMatch { it.contains(Regex(regex)) }
                     }
         }
     }
