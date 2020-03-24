@@ -2,6 +2,7 @@ package io.github.multicatch.cucumber.audit
 
 import io.cucumber.java8.En
 import io.cucumber.java8.Scenario
+import io.github.multicatch.cucumber.audit.context.AuditContext
 import io.netty.handler.codec.http.HttpMethod
 import javax.inject.Inject
 

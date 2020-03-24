@@ -4,13 +4,15 @@ import com.google.inject.AbstractModule
 import com.google.inject.Guice
 import io.cucumber.guice.CucumberModules.createScenarioModule
 import io.cucumber.guice.InjectorSource
-import io.cucumber.junit.Cucumber
+import io.cucumber.junit.CucumberAudit
 import io.cucumber.junit.CucumberOptions
+import io.github.multicatch.cucumber.audit.context.AuditContext
+import io.github.multicatch.cucumber.audit.context.DriverType
+import io.github.multicatch.cucumber.audit.context.auditContextOf
 import org.junit.AfterClass
 import org.junit.runner.RunWith
 
-
-@RunWith(Cucumber::class)
+@RunWith(CucumberAudit::class)
 @CucumberOptions(plugin = ["pretty"], strict = false)
 object CucumberTest {
     @AfterClass

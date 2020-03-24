@@ -1,4 +1,4 @@
-package io.github.multicatch.cucumber.audit
+package io.github.multicatch.cucumber.audit.context
 
 import io.netty.handler.codec.http.HttpMethod
 import io.netty.handler.codec.http.HttpRequest
@@ -16,19 +16,6 @@ import org.openqa.selenium.firefox.FirefoxOptions
 import org.openqa.selenium.remote.AbstractDriverOptions
 import org.openqa.selenium.remote.CapabilityType
 import org.openqa.selenium.remote.RemoteWebDriver
-
-interface AuditContext {
-    val proxy: BrowserMobProxy
-    val driver: RemoteWebDriver
-
-    var method: HttpMethod?
-}
-
-@JvmOverloads
-fun auditContextOf(
-        type: DriverType,
-        driverLocation: String? = null
-): AuditContext = DefaultAuditContext(type, driverLocation)
 
 class DefaultAuditContext
 @JvmOverloads constructor(
@@ -68,16 +55,11 @@ class DefaultAuditContext
         setCapability(CapabilityType.ACCEPT_SSL_CERTS, seleniumProxy)
     }
 
-    private fun requestFilter() = RequestFilter() { httpRequest: HttpRequest, _: HttpMessageContents, _: HttpMessageInfo ->
+    private fun requestFilter() = RequestFilter { httpRequest: HttpRequest, _: HttpMessageContents, _: HttpMessageInfo ->
         if (method != null) {
             httpRequest.method = method
         }
 
         null
     }
-}
-
-enum class DriverType(val driverLocationProperty: String) {
-    GECKO("webdriver.gecko.driver"),
-    CHROME("webdriver.chrome.driver")
 }
