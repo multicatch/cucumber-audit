@@ -1,0 +1,21 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+    <h1>Consumer App</h1>
+    {% if not logged_in %}
+        {% if error == 'access_denied' %}
+            <div class="alert alert-danger" role="alert">
+                Access was denied - please allow this app to access your data
+            </div>
+        {% elif error is not None %}
+            <div class="alert alert-danger" role="alert">
+                There was an internal error while using OAuth2 - please try again
+            </div>
+        {% endif %}
+        <a class="btn btn-primary" href="{{ authorization_link }}">Login using OAuth2</a>
+    {% else %}
+        Hello there, {{ user.username }}
+    {% endif %}
+
+{% endblock %}

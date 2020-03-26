@@ -1,5 +1,6 @@
 package io.github.multicatch.cucumber.audit.variables
 
+import io.github.multicatch.cucumber.audit.resourceFile
 import java.io.File
 import java.util.*
 
@@ -10,14 +11,14 @@ class PropertyVariableResolver(options: Properties) : VariableResolver {
 
     override fun resolve(variableName: String): String {
         return properties.getProperty(variableName)
-                ?: error("Cannot resolve \$${variableName} variable - no such entry in property file")
+                ?: "\$$variableName"
     }
 
 }
 
 fun propertiesOf(fileName: String): Properties = Properties().apply {
     val stream = if (fileName.startsWith("classpath:")) {
-        PropertyVariableResolver::class.java.classLoader.getResourceAsStream(fileName.drop("classpath:".length))
+        fileName.drop("classpath:".length).resourceFile()!!.inputStream()
     } else {
         File(fileName).inputStream()
     }

@@ -1,0 +1,4 @@
+OAUTH2_SERVER_URL = 'http://localhost:8000/oauth2'
+OAUTH2_CLIENT_ID = 'Qv6vn7hxGGNyGuLxOU7DHtvPAykevYe1fKwy0eEP'
+OAUTH2_CLIENT_SECRET = '51SAwsXvhxjMTRUufxQdobMnqs2PrcmK4AEyajWTPfr2LCDt9ML7zeOWPirAhC5rvQW9hKfsjNPoraLV9meCHyLGomvM4H0y7eMXVS2eNFH1H3kJFekePBbbRBUFEsLt'
+REDIRECT_URL = 'http://localhost:8000/consumer/'

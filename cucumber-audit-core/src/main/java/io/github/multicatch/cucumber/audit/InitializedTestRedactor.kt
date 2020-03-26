@@ -15,15 +15,15 @@ object InitializedTestRedactor {
     }
 }
 
-interface TestRedactor: (MutableList<ParentRunner<*>>) -> Unit
+interface TestRedactor : (MutableList<ParentRunner<*>>) -> Unit
 
-object VariableResolverRedactor: TestRedactor {
+object VariableResolverRedactor : TestRedactor {
     override fun invoke(children: MutableList<ParentRunner<*>>) {
         val resolver = VariableResolverFactory.create()
 
         children.replaceAll { runner ->
-            runner.redact {
-                it.apply {
+            runner.redact { feature ->
+                feature.apply {
                     pickles.replaceAll { pickle ->
                         pickle.apply {
                             steps.replaceAll {
