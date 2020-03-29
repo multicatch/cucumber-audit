@@ -5,11 +5,16 @@ import java.util.concurrent.TimeUnit
 
 class ServerDriver {
     private val workingDirectory = File("exampleApp/runserver.sh".resourceFile()!!.parent)
-    var serverProcess: Process? = null
+    private var serverProcess: Process? = null
 
     fun start() {
-        serverProcess = listOf("bash", "runserver.sh").asProcess(workingDirectory)
-        serverProcess?.waitFor(30, TimeUnit.SECONDS)
+        serverProcess = processOf(
+                command = "bash",
+                arguments = listOf("runserver.sh"),
+                workingDirectory = workingDirectory
+        ).apply {
+            waitFor(30, TimeUnit.SECONDS)
+        }
     }
 
     fun stop() {
