@@ -9,6 +9,7 @@ interface AuditContext {
     val driver: RemoteWebDriver
 
     var method: HttpMethod?
+    var headers: MutableMap<String, String>
 }
 
 @JvmOverloads

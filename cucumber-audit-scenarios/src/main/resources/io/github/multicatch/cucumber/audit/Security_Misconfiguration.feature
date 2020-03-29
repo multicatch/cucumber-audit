@@ -3,13 +3,15 @@ Feature: Security Misconfiguration
   Background:
     Given only whitelisted traffic is allowed
     And traffic matching "$allowed_traffic_regex" is allowed
+    And app under "$heartbeat_url" has already started
+    And cookies are cleared
 
   Scenario: The HttpOnly flag
   The HttpOnly flag in "Set-Cookie" header disables the ability to access the cookie through JavaScript.
   If an attacker successfully performs an XSS attack, the HttpOnly flag prevents from stealing the session cookie.
 
     Given the response headers are under inspection
-    When I go to "$auth_server_base_url"
+    When I go to "$auth_application_url"
     Then the "Set-Cookie" response header should contain "HttpOnly"
 
   Scenario: Headers indicating server software
@@ -18,7 +20,7 @@ Feature: Security Misconfiguration
   known vulnerabilities of that software. Disabling them makes it more difficult to exploit the server software.
 
     Given the response headers are under inspection
-    When I go to "$auth_server_base_url"
+    When I go to "$auth_application_url"
     Then the "Server" response header should not contain numbers
     And the "X-Powered-By" response header should not contain numbers
 
@@ -28,7 +30,7 @@ Feature: Security Misconfiguration
   Overriding default error pages makes it more difficult to exploit the server software.
 
     Given the response content is under inspection
-    When I go to "$auth_server_base_url/shouldbenotfound"
+    When I go to "$auth_application_url/shouldbenotfound"
     Then the response should not contain "<software>"
 
     Examples:
@@ -36,6 +38,7 @@ Feature: Security Misconfiguration
       | nginx       |
       | Apache      |
       | ASP.NET     |
+      | Django      |
       | HTTP Server |
 
   Scenario: Stack traces on error pages
@@ -44,9 +47,13 @@ Feature: Security Misconfiguration
   eg. used libraries, algorithms or server software.
 
     Given the response content is under inspection
-    When I make a "PATCH" request to "$auth_server_base_url"
+    When I use a "POST" HTTP method
+    And I add a "Authentication" header with value "!Unsupported"
+    And I add a "Content-Type" header with value "application/unsupported"
+    And I make a request to "$auth_application_url/?error=1283927"
     Then the response should not contain "Exception"
     And the response should not contain "Stacktrace"
     And the response should not contain "Traceback"
     And the response should not match "[a-zA-Z0-9.]+:[0-9]+\)"
-    And the response should not match "(l|L)ine [0-9]+"
+    And the response should not match "(?i)line [0-9]+"
+    And the response should not match "(?i)debug"

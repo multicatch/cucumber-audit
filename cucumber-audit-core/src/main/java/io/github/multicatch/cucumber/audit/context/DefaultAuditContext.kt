@@ -26,6 +26,7 @@ class DefaultAuditContext
     override val driver: RemoteWebDriver = createDriver(proxy, type, driverLocation)
 
     override var method: HttpMethod? = null
+    override var headers: MutableMap<String, String> = mutableMapOf()
 
     private fun createDriver(
             proxy: BrowserMobProxy,
@@ -58,6 +59,10 @@ class DefaultAuditContext
     private fun requestFilter() = RequestFilter { httpRequest: HttpRequest, _: HttpMessageContents, _: HttpMessageInfo ->
         if (method != null) {
             httpRequest.method = method
+        }
+
+        headers.forEach { (name, value) ->
+            httpRequest.headers()[name] = value
         }
 
         null

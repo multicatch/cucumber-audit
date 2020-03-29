@@ -13,14 +13,26 @@ class NavigationStepDefs @Inject constructor(
     init {
         Before { _: Scenario ->
             auditContext.method = null
+            auditContext.headers.clear()
+        }
+
+        Given("cookies are cleared") {
+            auditContext.driver.manage().deleteAllCookies()
         }
 
         When("I go to {string}") { url: String ->
             auditContext.driver.get(url)
         }
 
-        When("I make a {string} request to {string}") { method: String, url: String ->
+        When("I use a {string} HTTP method") { method: String ->
             auditContext.method = HttpMethod.valueOf(method)
+        }
+
+        When("I add a {string} header with value {string}") { header: String, value: String ->
+            auditContext.headers[header] = value
+        }
+
+        When("I make a request to {string}") { url: String ->
             auditContext.driver.get(url)
         }
     }
