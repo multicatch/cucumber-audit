@@ -11,7 +11,8 @@ class ServerDriver {
         serverProcess = processOf(
                 command = "bash",
                 arguments = listOf("runserver.sh"),
-                workingDirectory = workingDirectory
+                workingDirectory = workingDirectory,
+                output = ProcessBuilder.Redirect.to(File("/dev/null"))
         ).apply {
             waitFor(30, TimeUnit.SECONDS)
         }
