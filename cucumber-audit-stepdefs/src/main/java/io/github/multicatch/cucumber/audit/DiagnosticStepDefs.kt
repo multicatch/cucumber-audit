@@ -24,7 +24,7 @@ class DiagnosticStepDefs : En {
                     delay(interval)
                 }
             }
-            logger.debug("$address up after ${tries*interval/1000}s")
+            logger.debug("$address is up after ${tries*interval/1000}s wait")
         }
     }
 }
