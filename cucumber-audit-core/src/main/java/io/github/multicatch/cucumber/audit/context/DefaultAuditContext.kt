@@ -21,7 +21,7 @@ class DefaultAuditContext
 @JvmOverloads constructor(
         type: DriverType,
         driverLocation: String? = null,
-        headless: Boolean = true
+        headless: Boolean = false
 ) : AuditContext {
     override val proxy: BrowserMobProxy = BrowserMobProxyServer()
     override val driver: RemoteWebDriver = createDriver(proxy, type, driverLocation, headless)

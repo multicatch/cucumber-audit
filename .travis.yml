@@ -22,3 +22,21 @@ before_install:
 
 install:
   - mvn clean install -Dwebdriver.gecko.driver=$TRAVIS_BUILD_DIR/cucumber-audit-scenarios/src/test/resources/geckodriver
+
+before_deploy:
+  - git clone https://github.com/multicatch/multicatch.github.io.git
+  - mkdir -p multicatch.github.io/cucumber-audit/$TRAVIS_BRANCH
+  - cp -r cucumber-audit-scenarios/target/cucumber/cucumber-html-reports multicatch.github.io/cucumber-audit/$TRAVIS_BRANCH
+
+deploy:
+  - provider: pages
+    repo: multicatch/multicatch.github.io
+    target_branch: master
+    skip-cleanup: true
+    github-token:
+      secure: akQwdZw19MDiJo8Effcv6Rfki8cqp7tfrBd6jc+xPevjyd2hKTxAd8jixm4e3Khw31M8lnqTWxMjNeW5/NknvuuUOII4rBx6m8DF4pNkofBCFLUIA3Mqxg8Z3vXBUnnkTQQvdDPKt667TnAxd3+XdCKloucrO5HKiHh0ZIbvN7lMqnlBgEmnDbRaoGYE1VOwTCP8gLg+L+E5De/tv/T+sCIedB1YnckEWI9Y7DQFuUbR+Ww+YCITEpwTSfmC/yeDeBw7YVl4xhN5CW1DCaN9Cqm0fUNsTd3Bhaf3GBxcsfW26T0Pm7MjMMZMKK5b7Mktd3NkQoiNMQZ9/BVTuKta7prw9M0YVf5jWc5XEM4ztippueMpz9/OaWH5m6V5zY+Ph8PLtsHW+PA6dR+opN1TFc4fKgaP5hIA/DOQRKIXZhQzYgx11UAbPkOq7lLC/3rtYKlwGqbMvw4whbwejmCqB/SI3juF0vy+TWXg4dXIYo+RwBSl1CntzzGLdl+eEQK+vT/CQfXpg/sqdGSg8t8WsYc6k6FoK8CePAYIbGjhf1KT4YYMdUjT1vNStFjS2hVUd8yYlPApvSOgfSNBMDDtNqpu6Js6DehuRX1KgIiEbR0ARKro/6xeXASNJlaC++LIaOaVQQHM9fLHTg63p1+mYscQX89MtNt3F9XbpS8qCEQ=
+    keep-history: true
+    local-dir: "multicatch.github.io"
+    verbose: true
+    on:
+      all_branches: true

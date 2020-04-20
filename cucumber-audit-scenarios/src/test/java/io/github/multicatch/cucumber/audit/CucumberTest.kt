@@ -15,7 +15,8 @@ import org.junit.runner.RunWith
 
 @RunWith(CucumberAudit::class)
 @CucumberOptions(plugin = [
-    "pretty"
+    "pretty",
+    "de.monochromata.cucumber.report.PrettyReports:target/cucumber"
 ], strict = false)
 object CucumberTest {
     private val serverDriver = ServerDriver()
