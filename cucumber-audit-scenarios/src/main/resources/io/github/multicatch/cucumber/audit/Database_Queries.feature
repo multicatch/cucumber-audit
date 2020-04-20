@@ -28,13 +28,13 @@ Feature: Database Queries Threats
 
     Given I am on "$auth_application_url"
     And the response content is under inspection
-    When I enter "<usafe_sql_query>" into a field selected by "input[name='username']"
-    And I enter "<usafe_sql_query>" into a field selected by "input[name='password']"
+    When I enter "<unsafe_form_value>" into a field selected by "input[name='username']"
+    And I enter "<unsafe_form_value>" into a field selected by "input[name='password']"
     And I click on "form input[type='submit']"
     Then the response time should not be longer than 5000 ms
 
     Examples:
-      | usafe_sql_query                                 |
+      | unsafe_form_value                               |
       | ' OR sleep(5000) -- .                           |
       | ' \|\| dbms_pipe.receive_message(('a'), 5) -- . |
       | ' OR pg_sleep(5) -- .                           |
