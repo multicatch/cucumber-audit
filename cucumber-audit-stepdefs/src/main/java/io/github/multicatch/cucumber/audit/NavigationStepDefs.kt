@@ -20,6 +20,10 @@ class NavigationStepDefs @Inject constructor(
             auditContext.driver.manage().deleteAllCookies()
         }
 
+        Given("I am on {string}") { url: String ->
+            auditContext.driver.get(url)
+        }
+
         When("I go to {string}") { url: String ->
             auditContext.driver.get(url)
         }
