@@ -34,7 +34,7 @@ object CucumberTest {
     }
 }
 
-val auditContext: AuditContext = auditContextOf(DriverType.GECKO)
+val auditContext: AuditContext = auditContextOf(DriverType.GECKO, headless = true)
 
 class GuiceInjectorSource : InjectorSource {
     override fun getInjector() = Guice.createInjector(createScenarioModule(), CucumberModule())

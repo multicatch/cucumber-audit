@@ -15,8 +15,9 @@ interface AuditContext {
 @JvmOverloads
 fun auditContextOf(
         type: DriverType,
-        driverLocation: String? = null
-): AuditContext = DefaultAuditContext(type, driverLocation)
+        driverLocation: String? = null,
+        headless: Boolean = false
+): AuditContext = DefaultAuditContext(type, driverLocation, headless)
 
 enum class DriverType(val driverLocationProperty: String) {
     GECKO("webdriver.gecko.driver"),

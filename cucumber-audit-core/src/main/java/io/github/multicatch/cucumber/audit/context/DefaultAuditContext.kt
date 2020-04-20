@@ -20,10 +20,11 @@ import org.openqa.selenium.remote.RemoteWebDriver
 class DefaultAuditContext
 @JvmOverloads constructor(
         type: DriverType,
-        driverLocation: String? = null
+        driverLocation: String? = null,
+        headless: Boolean = true
 ) : AuditContext {
     override val proxy: BrowserMobProxy = BrowserMobProxyServer()
-    override val driver: RemoteWebDriver = createDriver(proxy, type, driverLocation)
+    override val driver: RemoteWebDriver = createDriver(proxy, type, driverLocation, headless)
 
     override var method: HttpMethod? = null
     override var headers: MutableMap<String, String> = mutableMapOf()
@@ -31,7 +32,8 @@ class DefaultAuditContext
     private fun createDriver(
             proxy: BrowserMobProxy,
             type: DriverType,
-            driverLocation: String?
+            driverLocation: String?,
+            headless: Boolean
     ): RemoteWebDriver {
         proxy.setTrustAllServers(true)
         proxy.start(0)
@@ -45,8 +47,8 @@ class DefaultAuditContext
         val seleniumProxy = ClientUtil.createSeleniumProxy(proxy)
 
         return when (type) {
-            DriverType.GECKO -> FirefoxDriver(FirefoxOptions().setHeadless(true).with(seleniumProxy) as FirefoxOptions)
-            DriverType.CHROME -> ChromeDriver(ChromeOptions().setHeadless(true).with(seleniumProxy) as ChromeOptions)
+            DriverType.GECKO -> FirefoxDriver(FirefoxOptions().setHeadless(headless).with(seleniumProxy) as FirefoxOptions)
+            DriverType.CHROME -> ChromeDriver(ChromeOptions().setHeadless(headless).with(seleniumProxy) as ChromeOptions)
         }
     }
 
