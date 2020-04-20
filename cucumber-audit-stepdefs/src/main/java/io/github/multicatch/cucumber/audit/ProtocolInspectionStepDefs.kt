@@ -20,7 +20,10 @@ class ProtocolInspectionStepDefs @Inject constructor(
         }
 
         Then("the connection should be secure") {
-            Assertions.assertThat(urlConnection).isInstanceOf(HttpsURLConnection::class.java)
+            Assertions.assertThat(urlConnection).isInstanceOfAny(
+                    HttpsURLConnection::class.java,
+                    sun.net.www.protocol.https.HttpsURLConnectionImpl::class.java
+            )
             (urlConnection as HttpsURLConnection).also {
                 it.connect()
                 Assertions.assertThat(it.serverCertificates).isNotEmpty

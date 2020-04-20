@@ -14,9 +14,11 @@ import org.junit.BeforeClass
 import org.junit.runner.RunWith
 
 @RunWith(CucumberAudit::class)
-@CucumberOptions(plugin = ["pretty"], strict = false)
+@CucumberOptions(plugin = [
+    "pretty"
+], strict = false)
 object CucumberTest {
-    val serverDriver = ServerDriver()
+    private val serverDriver = ServerDriver()
 
     @BeforeClass
     @JvmStatic

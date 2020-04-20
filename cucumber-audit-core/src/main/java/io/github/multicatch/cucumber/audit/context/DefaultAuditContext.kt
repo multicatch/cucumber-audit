@@ -45,8 +45,8 @@ class DefaultAuditContext
         val seleniumProxy = ClientUtil.createSeleniumProxy(proxy)
 
         return when (type) {
-            DriverType.GECKO -> FirefoxDriver(FirefoxOptions().with(seleniumProxy) as FirefoxOptions)
-            DriverType.CHROME -> ChromeDriver(ChromeOptions().with(seleniumProxy) as ChromeOptions)
+            DriverType.GECKO -> FirefoxDriver(FirefoxOptions().setHeadless(true).with(seleniumProxy) as FirefoxOptions)
+            DriverType.CHROME -> ChromeDriver(ChromeOptions().setHeadless(true).with(seleniumProxy) as ChromeOptions)
         }
     }
 
