@@ -64,7 +64,6 @@ class ResponseInspectionStepDefs @Inject constructor(
                     }
         }
 
-
         Then("the response should not match {string}") { regex: String ->
             auditContext.proxy.har
                     .log
@@ -75,6 +74,19 @@ class ResponseInspectionStepDefs @Inject constructor(
                     .also { contents ->
                         Assertions.assertThat(contents)
                                 .noneMatch { it.contains(Regex(regex)) }
+                    }
+        }
+
+        Then("the response time should not be longer than {long} ms") { time: Long ->
+            auditContext.proxy.har
+                    .log
+                    .entries
+                    .mapNotNull { entry ->
+                        entry.timings.receive
+                    }
+                    .also { receiveTime ->
+                        Assertions.assertThat(receiveTime)
+                                .noneMatch { it >= time }
                     }
         }
     }

@@ -6,11 +6,11 @@ Feature: Database Queries Threats
     And app under "$heartbeat_url" has already started
 
   Scenario: Known Database Vulnerabilities Disclosure
-  Creation of database queries by simply inserting parameters into a string pattern is an SQL Injection
-  vulnerability. An attacker can use form submit to access or alter information present in the database.
+  Unhandled database errors may lead to disclosure about database system version.
+  This may be used to prepare an attack that uses known system vulnerabilities.
 
-    Given the response content is under inspection
-    And I am on "$auth_application_url"
+    Given I am on "$auth_application_url"
+    And the response content is under inspection
     When I enter "' UNKNOWN SYNTAX; -- ." into a field selected by "input[name='username']"
     And I enter "' UNKNOWN SYNTAX; -- ." into a field selected by "input[name='password']"
     And I click on "form input[type='submit']"
@@ -21,3 +21,21 @@ Feature: Database Queries Threats
     And the response should not match "[a-zA-Z0-9.]+:[0-9]+\)"
     And the response should not match "(?i)line [0-9]+"
     And the response should not match "(?i)debug"
+
+  Scenario Outline: Unsafe Query Handling
+  Creation of database queries by simply inserting parameters into a string pattern is an SQL Injection
+  vulnerability. An attacker can use form submit to access or alter information present in the database.
+
+    Given I am on "$auth_application_url"
+    And the response content is under inspection
+    When I enter "<usafe_sql_query>" into a field selected by "input[name='username']"
+    And I enter "<usafe_sql_query>" into a field selected by "input[name='password']"
+    And I click on "form input[type='submit']"
+    Then the response time should not be longer than 5000 ms
+
+    Examples:
+      | usafe_sql_query                                 |
+      | ' OR sleep(5000) -- .                           |
+      | ' \|\| dbms_pipe.receive_message(('a'), 5) -- . |
+      | ' OR pg_sleep(5) -- .                           |
+      | ' OR WAITFOR DELAY '0:0:05' -- .                |
