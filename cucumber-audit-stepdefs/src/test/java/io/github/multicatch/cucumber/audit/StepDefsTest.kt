@@ -8,10 +8,17 @@ import io.cucumber.junit.CucumberAudit
 import io.github.multicatch.cucumber.audit.context.AuditContext
 import io.github.multicatch.cucumber.audit.context.DriverType
 import io.github.multicatch.cucumber.audit.context.auditContextOf
+import org.junit.AfterClass
 import org.junit.runner.RunWith
 
 @RunWith(CucumberAudit::class)
-class StepDefsTest
+object StepDefsTest {
+    @AfterClass
+    @JvmStatic
+    fun teardown() {
+        auditContext.driver.quit()
+    }
+}
 
 val auditContext: AuditContext = auditContextOf(DriverType.CHROME, headless = true)
 

@@ -11,7 +11,7 @@ Available [here](cucumber-audit-scenarios/src/main/resources/io/github/multicatc
 Download a Selenium Gecko driver and run the following in the project directory:
 
 ```shell script
-mvn clean install -Dwebdriver.gecko.driver=/path/to/geckodriver
+mvn test -DfailIfNoTests=false -Dtest=CucumberTest -Dwebdriver.gecko.driver=/path/to/geckodriver
 ```
 
 ### Pretty reports
