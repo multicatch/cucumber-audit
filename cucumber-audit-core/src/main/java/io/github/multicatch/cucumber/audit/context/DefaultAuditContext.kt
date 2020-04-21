@@ -8,13 +8,8 @@ import net.lightbody.bmp.client.ClientUtil
 import net.lightbody.bmp.filters.RequestFilter
 import net.lightbody.bmp.util.HttpMessageContents
 import net.lightbody.bmp.util.HttpMessageInfo
-import org.openqa.selenium.Proxy
 import org.openqa.selenium.chrome.ChromeDriver
-import org.openqa.selenium.chrome.ChromeOptions
 import org.openqa.selenium.firefox.FirefoxDriver
-import org.openqa.selenium.firefox.FirefoxOptions
-import org.openqa.selenium.remote.AbstractDriverOptions
-import org.openqa.selenium.remote.CapabilityType
 import org.openqa.selenium.remote.RemoteWebDriver
 
 // WARNING: Class excluded from coverage, please refrain from major changes
@@ -60,14 +55,8 @@ class DefaultAuditContext
         val seleniumProxy = ClientUtil.createSeleniumProxy(proxy)
 
         return when (type) {
-            DriverType.GECKO -> FirefoxDriver(FirefoxOptions().setHeadless(headless).with(seleniumProxy) as FirefoxOptions)
-            DriverType.CHROME -> ChromeDriver(ChromeOptions().setHeadless(headless).with(seleniumProxy) as ChromeOptions)
+            DriverType.GECKO -> FirefoxDriver(createFirefoxOptions(seleniumProxy, headless))
+            DriverType.CHROME -> ChromeDriver(createChromeOptions(seleniumProxy, headless))
         }
-    }
-
-    private fun <T : AbstractDriverOptions<T>> T.with(seleniumProxy: Proxy) = apply {
-        setProxy(seleniumProxy)
-        setCapability(CapabilityType.PROXY, seleniumProxy)
-        setCapability(CapabilityType.ACCEPT_SSL_CERTS, seleniumProxy)
     }
 }
