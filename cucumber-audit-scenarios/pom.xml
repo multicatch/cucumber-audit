@@ -11,6 +11,10 @@
 
     <artifactId>cucumber-audit-scenarios</artifactId>
 
+    <properties>
+        <sonar.exclusions>**/exampleApp/**</sonar.exclusions>
+    </properties>
+
     <dependencies>
         <dependency>
             <groupId>io.github.multicatch.cucumber.audit</groupId>
