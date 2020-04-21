@@ -13,7 +13,7 @@ import org.junit.runner.RunWith
 @RunWith(CucumberAudit::class)
 class StepDefsTest
 
-val auditContext: AuditContext = auditContextOf(DriverType.GECKO, headless = true)
+val auditContext: AuditContext = auditContextOf(DriverType.CHROME, headless = true)
 
 class GuiceInjectorSource : InjectorSource {
     override fun getInjector() = Guice.createInjector(createScenarioModule(), CucumberModule())
