@@ -5,7 +5,8 @@ Feature: Authentication Page Threats
     And traffic matching "$allowed_traffic_regex" is allowed
     And app under "$heartbeat_url" has already started
 
-  Scenario: Session Hijacking
+  @Spoofing
+  Scenario: Session Hijacking (XSS)
   The HttpOnly flag in "Set-Cookie" header disables the ability to access the cookie through JavaScript.
   If an attacker successfully performs an XSS attack, the HttpOnly flag prevents from stealing the session cookie.
 
@@ -14,6 +15,7 @@ Feature: Authentication Page Threats
     When I go to "$auth_application_url"
     Then the "Set-Cookie" response header should contain "HttpOnly"
 
+  @InformationDisclosure
   Scenario: Known Software Vulnerabilities Disclosure (Headers)
   The "Server" and "X-Powered-By" headers provide information about technology that is used on the server side.
   They usually contain the software version (eg. "Apache/2.2.15 (CentOS) ...") and can be used to find
@@ -24,6 +26,7 @@ Feature: Authentication Page Threats
     Then the "Server" response header should not contain numbers
     And the "X-Powered-By" response header should not contain numbers
 
+  @InformationDisclosure
   Scenario Outline: Known Software Vulnerabilities Disclosure (Error Pages)
   The default error pages can contain information about the server software. Usually this includes the version
   of the software used. This piece of information can be used to find known vulnerabilities of that software.
@@ -41,6 +44,7 @@ Feature: Authentication Page Threats
       | Django      |
       | HTTP Server |
 
+  @InformationDisclosure
   Scenario: System Architecture Disclosure (Error Pages)
   Usually the server software prints stack traces on error by default. This is a debug feature that should be disabled
   when running the software in production. The stack trace may provide information that can be used by an attacker,

@@ -5,6 +5,7 @@ Feature: Database Queries Threats
     And traffic matching "$allowed_traffic_regex" is allowed
     And app under "$heartbeat_url" has already started
 
+  @InformationDisclosure
   Scenario: Known Database Vulnerabilities Disclosure
   Unhandled database errors may lead to disclosure about database system version.
   This may be used to prepare an attack that uses known system vulnerabilities.
@@ -22,6 +23,7 @@ Feature: Database Queries Threats
     And the response should not match "(?i)line [0-9]+"
     And the response should not match "(?i)debug"
 
+  @Tampering
   Scenario Outline: Unsafe Query Handling
   Creation of database queries by simply inserting parameters into a string pattern is an SQL Injection
   vulnerability. An attacker can use form submit to access or alter information present in the database.
