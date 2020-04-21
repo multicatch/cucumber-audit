@@ -17,6 +17,7 @@ import org.openqa.selenium.remote.AbstractDriverOptions
 import org.openqa.selenium.remote.CapabilityType
 import org.openqa.selenium.remote.RemoteWebDriver
 
+// WARNING: Class excluded from coverage, please refrain from major changes
 class DefaultAuditContext
 @JvmOverloads constructor(
         type: DriverType,

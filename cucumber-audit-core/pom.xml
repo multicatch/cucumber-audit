@@ -11,6 +11,10 @@
 
     <artifactId>cucumber-audit-core</artifactId>
 
+    <properties>
+        <sonar.coverage.exclusions>**/cucumber/audit/context/DefaultAuditContext.kt</sonar.coverage.exclusions>
+    </properties>
+
     <dependencies>
         <dependency>
             <groupId>io.cucumber</groupId>
