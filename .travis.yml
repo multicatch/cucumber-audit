@@ -11,6 +11,10 @@ env:
 
 addons:
   firefox: latest
+  sonarcloud:
+    organization: "multicatch"
+    token:
+      secure: "f81XdOCO+9gBNlh3Av1BW1eeS042dxVn4XdIvODx2H1Lle9k0TXmJOCC9pt45kQofiOQP0bCCGFT7Vh4LQayu2mKno4LLhMSXfPR5VNY1VICTa9l0OGQoGxj9OsfwHD2MC6iQGnDZeDBh2HvQ86I7cumzfbphcaK2gEHopkqn3UHt/b0r+nPbcGYm6J+/WnFZ4EaYaxdATrJlz7gDfpLbyJH2ccqLzaT+dP3SkTIYWe/tepn9b44w6vLK6J/GCJwgVJHCg/UxeXeWTdy8FJChKkSdNzxivLv2fF4QcP6ONlbFvS3J8AVZMB/PTOXBBsAJQf1K8jjjRRL2ZLJaX40/6Z8eE0Va5ZR7k1FvX2B/frUH33gUpBAoe+JBUO2eM9Np71pego4xm9d5eyzVvOiTVN/X3X33+sVlyeXOkUCSEZpDxRIncc7Spry4oHdyxbmLsekqRWQpw220Wzrn5XdUNQculxlUNdx7aS3d0vGiRmBbbeWbGRrXG12bAs0OdXykTuRgoc0mH/54WvpXuSeGfvE6BNZOwbitntXSzE/sEfadcaWjpFjb+19duUbFqzJmG4PhMKVtTs6MbnnDozn0aJuyHmbWDYWogyBySiUdfd0hACwlHkLm0I8FYiGQJD11VbNL4SzJy0wmircQPVcGWniynDrE974TmFJmm/kP7M="
 
 cache:
   directories:
@@ -22,6 +26,7 @@ before_install:
 
 script:
   - mvn clean install -Dwebdriver.gecko.driver=$TRAVIS_BUILD_DIR/cucumber-audit-scenarios/src/test/resources/geckodriver
+  - mvn jacoco:report sonar:sonar -Dsonar.projectKey=multicatch_cucumber-audit
 
 before_deploy:
   - git clone https://github.com/multicatch/multicatch.github.io.git
