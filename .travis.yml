@@ -11,6 +11,7 @@ env:
 
 addons:
   firefox: latest
+  chrome: stable
   sonarcloud:
     organization: "multicatch"
     token:
@@ -25,7 +26,7 @@ before_install:
   - sudo apt-get -y install python3 python3-pip
 
 script:
-  - mvn clean install -Dwebdriver.gecko.driver=$TRAVIS_BUILD_DIR/cucumber-audit-scenarios/src/test/resources/geckodriver
+  - mvn clean install -Dwebdriver.gecko.driver=$TRAVIS_BUILD_DIR/cucumber-audit-scenarios/src/test/resources/geckodriver -Dwebdriver.chrome.driver=$TRAVIS_BUILD_DIR/cucumber-audit-stepdefs/src/test/resources/chromedriver
   - mvn jacoco:report sonar:sonar -Dsonar.projectKey=multicatch_cucumber-audit
 
 before_deploy:

@@ -29,6 +29,18 @@ class DefaultAuditContext
     override var method: HttpMethod? = null
     override var headers: MutableMap<String, String> = mutableMapOf()
 
+    private val requestFilter = RequestFilter { httpRequest: HttpRequest, _: HttpMessageContents, _: HttpMessageInfo ->
+        if (method != null) {
+            httpRequest.method = method
+        }
+
+        headers.forEach { (name, value) ->
+            httpRequest.headers()[name] = value
+        }
+
+        null
+    }
+
     private fun createDriver(
             proxy: BrowserMobProxy,
             type: DriverType,
@@ -38,7 +50,7 @@ class DefaultAuditContext
         proxy.setTrustAllServers(true)
         proxy.start(0)
         proxy.setHarCaptureTypes(setOf())
-        proxy.addRequestFilter(requestFilter())
+        proxy.addRequestFilter(requestFilter)
 
         if (driverLocation != null) {
             System.setProperty(type.driverLocationProperty, driverLocation)
@@ -56,17 +68,5 @@ class DefaultAuditContext
         setProxy(seleniumProxy)
         setCapability(CapabilityType.PROXY, seleniumProxy)
         setCapability(CapabilityType.ACCEPT_SSL_CERTS, seleniumProxy)
-    }
-
-    private fun requestFilter() = RequestFilter { httpRequest: HttpRequest, _: HttpMessageContents, _: HttpMessageInfo ->
-        if (method != null) {
-            httpRequest.method = method
-        }
-
-        headers.forEach { (name, value) ->
-            httpRequest.headers()[name] = value
-        }
-
-        null
     }
 }
