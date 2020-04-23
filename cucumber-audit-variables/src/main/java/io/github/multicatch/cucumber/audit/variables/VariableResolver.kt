@@ -9,7 +9,7 @@ interface VariableResolver {
             if (text == null) {
                 null
             } else {
-                Regex("\\$[a-zA-Z][a-zA-Z0-9_-]*").replace(text) {
+                Regex("""(?<!\\)\${'$'}[a-zA-Z][a-zA-Z0-9_-]*""").replace(text) {
                     resolve(it.value.drop(1))
                 }
             }

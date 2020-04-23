@@ -11,6 +11,8 @@
         <module>cucumber-audit-core</module>
         <module>cucumber-audit-stepdefs</module>
         <module>cucumber-audit-scenarios</module>
+        <module>cucumber-audit-junit</module>
+        <module>cucumber-audit-variables</module>
     </modules>
 
     <properties>

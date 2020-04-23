@@ -18,10 +18,23 @@
     <dependencies>
         <dependency>
             <groupId>io.github.multicatch.cucumber.audit</groupId>
+            <artifactId>cucumber-audit-variables</artifactId>
+            <version>${project.version}</version>
+        </dependency>
+
+        <dependency>
+            <groupId>io.github.multicatch.cucumber.audit</groupId>
+            <artifactId>cucumber-audit-junit</artifactId>
+            <version>${project.version}</version>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>io.github.multicatch.cucumber.audit</groupId>
             <artifactId>cucumber-audit-stepdefs</artifactId>
             <version>${project.version}</version>
             <scope>test</scope>
         </dependency>
+
         <dependency>
             <groupId>io.cucumber</groupId>
             <artifactId>cucumber-junit</artifactId>

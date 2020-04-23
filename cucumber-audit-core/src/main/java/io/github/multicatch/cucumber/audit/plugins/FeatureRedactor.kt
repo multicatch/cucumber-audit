@@ -1,20 +1,15 @@
-package io.cucumber.junit
+package io.github.multicatch.cucumber.audit.plugins
 
 import io.cucumber.core.gherkin.Argument
 import io.cucumber.core.gherkin.Feature
 import io.cucumber.core.gherkin.Step
 import io.cucumber.core.gherkin.StepType
-import org.junit.runners.ParentRunner
+import io.cucumber.plugin.EventListener
+import io.cucumber.plugin.event.EventPublisher
 
-fun ParentRunner<*>.redact(transformation: (Feature) -> Feature): ParentRunner<*> {
-    if (this is FeatureRunner) {
-        val declaredField = FeatureRunner::class.java.getDeclaredField("feature")
-        declaredField.isAccessible = true
-        val feature = declaredField.get(this) as Feature
-        declaredField.set(this, transformation(feature))
-        declaredField.isAccessible = false
-    }
-    return this
+interface FeatureRedactor : EventListener {
+    override fun setEventPublisher(publisher: EventPublisher) {}
+    fun redact(feature: Feature): Feature
 }
 
 class RedactedStep(

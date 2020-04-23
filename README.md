@@ -24,4 +24,6 @@ This project uses [`de.monochromata.cucumber:reporting-plugin`](https://gitlab.c
 
 By default, pretty html reports are generated into `cucumber-audit-scenarios/target/cucumber/cucumber-html-reports` directory.
 
-Reports from master branch are deployed and available [here](https://multicatch.github.io/cucumber-audit/master/cucumber-html-reports/overview-features.html).
+Reports are deployed and available here:
+* [master](https://multicatch.github.io/cucumber-audit/master/cucumber-html-reports/overview-features.html)
+* [develop](https://multicatch.github.io/cucumber-audit/develop/cucumber-html-reports/overview-features.html)
