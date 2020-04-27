@@ -5,6 +5,9 @@ dist: bionic
 jdk:
   - openjdk8
 
+services:
+  - docker
+
 env:
   global:
     - MOZ_HEADLESS=1
