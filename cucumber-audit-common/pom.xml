@@ -9,19 +9,12 @@
     </parent>
     <modelVersion>4.0.0</modelVersion>
 
-    <artifactId>cucumber-audit-variables</artifactId>
+    <artifactId>cucumber-audit-common</artifactId>
 
     <dependencies>
         <dependency>
-            <groupId>io.github.multicatch.cucumber.audit</groupId>
-            <artifactId>cucumber-audit-common</artifactId>
-            <version>${project.version}</version>
-        </dependency>
-        <dependency>
-            <groupId>io.github.multicatch.cucumber.audit</groupId>
-            <artifactId>cucumber-audit-plugins</artifactId>
-            <version>${project.version}</version>
+            <groupId>org.junit.jupiter</groupId>
+            <artifactId>junit-jupiter</artifactId>
         </dependency>
     </dependencies>
-
 </project>

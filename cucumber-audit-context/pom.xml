@@ -9,17 +9,14 @@
     </parent>
     <modelVersion>4.0.0</modelVersion>
 
-    <artifactId>cucumber-audit-core</artifactId>
+    <artifactId>cucumber-audit-context</artifactId>
 
     <properties>
         <sonar.coverage.exclusions>**/cucumber/audit/context/DefaultAuditContext.kt</sonar.coverage.exclusions>
     </properties>
 
+
     <dependencies>
-        <dependency>
-            <groupId>io.cucumber</groupId>
-            <artifactId>cucumber-java8</artifactId>
-        </dependency>
         <dependency>
             <groupId>org.seleniumhq.selenium</groupId>
             <artifactId>selenium-java</artifactId>
@@ -37,5 +34,4 @@
             <artifactId>browsermob-core</artifactId>
         </dependency>
     </dependencies>
-
 </project>

@@ -14,7 +14,7 @@
     <dependencies>
         <dependency>
             <groupId>io.github.multicatch.cucumber.audit</groupId>
-            <artifactId>cucumber-audit-core</artifactId>
+            <artifactId>cucumber-audit-plugins</artifactId>
             <version>${project.version}</version>
         </dependency>
         <dependency>

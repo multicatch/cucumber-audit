@@ -8,7 +8,10 @@ import io.cucumber.plugin.EventListener
 import io.cucumber.plugin.event.EventPublisher
 
 interface FeatureRedactor : EventListener {
-    override fun setEventPublisher(publisher: EventPublisher) {}
+    override fun setEventPublisher(publisher: EventPublisher) {
+        // unused by cucumber-audit
+    }
+
     fun redact(feature: Feature): Feature
 }
 

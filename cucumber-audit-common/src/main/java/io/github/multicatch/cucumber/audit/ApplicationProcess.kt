@@ -1,6 +1,5 @@
 package io.github.multicatch.cucumber.audit
 
-import io.github.multicatch.cucumber.audit.context.AuditContext
 import java.io.File
 
 fun processOf(
@@ -14,7 +13,3 @@ fun processOf(
         .redirectOutput(output)
         .redirectError(error)
         .start()
-
-fun String.resourceFile() = AuditContext::class.java.classLoader.getResource(this)?.path?.let {
-    File(it)
-}

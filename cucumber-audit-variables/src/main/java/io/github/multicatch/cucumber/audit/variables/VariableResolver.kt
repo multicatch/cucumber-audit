@@ -1,7 +1,7 @@
 package io.github.multicatch.cucumber.audit.variables
 
-import io.cucumber.core.options.Constants
-import io.cucumber.core.options.CucumberProperties
+import io.github.multicatch.cucumber.audit.CUCUMBER_PROPERTIES_FILE_NAME
+import io.github.multicatch.cucumber.audit.resourceFile
 import java.util.*
 
 interface VariableResolver {
@@ -9,7 +9,7 @@ interface VariableResolver {
             if (text == null) {
                 null
             } else {
-                Regex("""(?<!\\)\${'$'}[a-zA-Z][a-zA-Z0-9_-]*""").replace(text) {
+                Regex("""(?<!\\)${"\\$"}[a-zA-Z][a-zA-Z0-9_-]*""").replace(text) {
                     resolve(it.value.drop(1))
                 }
             }
@@ -21,7 +21,7 @@ object VariableResolverFactory {
 
     fun create(): VariableResolver {
         val options = Properties().apply {
-            load(CucumberProperties::class.java.getResourceAsStream("/" + Constants.CUCUMBER_PROPERTIES_FILE_NAME))
+            load(CUCUMBER_PROPERTIES_FILE_NAME.resourceFile()!!.inputStream())
         }
 
         val resolverClass = options.getProperty("audit.variable_resolver", PropertyVariableResolver::class.java.canonicalName)
