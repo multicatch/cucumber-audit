@@ -4,13 +4,21 @@
 [![Quality Gate Status](https://sonarcloud.io/api/project_badges/measure?project=multicatch_cucumber-audit&metric=alert_status)](https://sonarcloud.io/dashboard?id=multicatch_cucumber-audit)
 [![SonarCloud Coverage](https://sonarcloud.io/api/project_badges/measure?project=multicatch_cucumber-audit&metric=coverage)](https://sonarcloud.io/component_measures/metric/coverage/list?id=multicatch_cucumber-audit)
 
-Easy automated auditing with preconfigured step definitions
+Easy automated auditing with preconfigured step definitions.
 
-### Sample scenarios
+This project aims to provide an easy way for configuring an automated audit or web application test using Selenium and Cucumber.
 
-Available [here](cucumber-audit-scenarios/src/main/resources/io/github/multicatch/cucumber/audit)
+## Features
 
-### How to run sample scenarios
+* write audit scenarios using natural language (Gherkin) thanks to [Cucumber](https://github.com/cucumber/cucumber)
+* explore your application and inspect responses thanks to [Selenium](https://github.com/SeleniumHQ/selenium)
+* use prepared step definitions for writing scenarios without Java/Kotlin knowledge
+* use variable substitution in feature files
+* manipulate or inspect HTTP requests and responses thanks to [browsermob-proxy](https://github.com/lightbody/browsermob-proxy)
+
+## Sample scenarios
+
+Available [here](cucumber-audit-scenarios/src/main/resources/io/github/multicatch/cucumber/audit).
 
 Download a Selenium Gecko driver and run the following in the project directory:
 
@@ -18,7 +26,7 @@ Download a Selenium Gecko driver and run the following in the project directory:
 mvn test -DfailIfNoTests=false -Dtest=CucumberTest -Dwebdriver.gecko.driver=/path/to/geckodriver
 ```
 
-### Pretty reports
+## Pretty reports
 
 This project uses [`de.monochromata.cucumber:reporting-plugin`](https://gitlab.com/monochromata-de/cucumber-reporting-plugin) to generate pretty reports.
 
