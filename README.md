@@ -26,6 +26,34 @@ Download a Selenium Gecko driver and run the following in the project directory:
 mvn test -DfailIfNoTests=false -Dtest=CucumberTest -Dwebdriver.gecko.driver=/path/to/geckodriver
 ```
 
+## Running it standalone
+
+You can run it standalone using jar build in cucumber-audit-standalone module
+
+Example:
+
+```shell script
+java jar cucumber-audit-standalone.jar path/to/features \
+  --glue io.github.multicatch.cucumber.audit \
+  --plugin pretty
+  --webdriver.type GECKO \
+  --webdriver.gecko.driver path/to/geckodriver \
+  --webdriver.headless true
+```
+
+Instead of path/to/features provide a path to your *.feature files. 
+
+Other options:
+* `webdriver.type` - specify type of the webdriver used (GECKO/CHROME)
+* `webdriver.gecko.driver` - specify location of the geckodriver binary
+* `webdriver.chrome.driver` - specify location of the chromedriver binary
+* `webdriver.headless` - specify whether to start browser in the headless or not (true/false)
+
+You can also use options available in cucumber standalone. To see them use `--help`.
+
+To use variable substitution plugin, use `--plugin io.github.multicatch.cucumber.audit.variables.VariableResolvingRedactor` option.
+Variables will be read from the environment.
+
 ## Pretty reports
 
 This project uses [`de.monochromata.cucumber:reporting-plugin`](https://gitlab.com/monochromata-de/cucumber-reporting-plugin) to generate pretty reports.

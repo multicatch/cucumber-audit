@@ -4,8 +4,10 @@ import io.github.multicatch.cucumber.audit.resourceFile
 import java.io.File
 import java.util.*
 
+const val PROPERTY_VARIABLE_FILE = "audit.variable_file"
+
 class PropertyVariableResolver(options: Properties) : VariableResolver {
-    private val properties = options.getProperty("audit.variable_file")?.let {
+    private val properties = options.getProperty(PROPERTY_VARIABLE_FILE)?.let {
         propertiesOf(it)
     } ?: options
 

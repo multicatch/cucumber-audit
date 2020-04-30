@@ -21,6 +21,9 @@ object VariableResolverFactory {
 
     fun create(): VariableResolver {
         val options = Properties().apply {
+            System.getenv().forEach { (key, value) ->
+                setProperty(key, value)
+            }
             load(CUCUMBER_PROPERTIES_FILE_NAME.resourceFile()!!.inputStream())
         }
 

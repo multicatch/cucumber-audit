@@ -16,7 +16,7 @@ import org.junit.runner.RunWith
 @RunWith(CucumberAudit::class)
 @CucumberOptions(plugin = [
     "pretty",
-    "io.github.multicatch.cucumber.audit.variables.VariableResolverRedactor",
+    "io.github.multicatch.cucumber.audit.variables.VariableResolvingRedactor",
     "de.monochromata.cucumber.report.PrettyReports:target/cucumber"
 ], strict = true)
 object CucumberTest {

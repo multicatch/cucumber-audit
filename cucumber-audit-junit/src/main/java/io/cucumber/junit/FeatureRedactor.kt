@@ -6,14 +6,14 @@ import io.github.multicatch.cucumber.audit.plugins.FeatureRedactor
 import org.junit.runners.ParentRunner
 
 fun Plugins.runRedactors(children: MutableList<ParentRunner<*>>) {
-    plugins.filterIsInstance<FeatureRedactor>()
-            .forEach { redactor ->
-                children.replaceAll { runner ->
-                    runner.redact { feature ->
-                        redactor.redact(feature)
-                    }
-                }
+    val redactors = plugins.filterIsInstance<FeatureRedactor>()
+    children.forEach { runner ->
+        redactors.fold(runner) { current: ParentRunner<*>, featureRedactor: FeatureRedactor ->
+            current.redact { feature ->
+                featureRedactor.redact(feature)
             }
+        }
+    }
 }
 
 fun ParentRunner<*>.redact(transformation: (Feature) -> Feature): ParentRunner<*> = apply {

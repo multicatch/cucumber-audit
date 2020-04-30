@@ -26,9 +26,10 @@ cache:
 
 before_script:
   - git fetch origin +refs/heads/master:refs/remotes/origin/master
+  - ./download_drivers.sh
 
 script:
-  - mvn clean install -Dwebdriver.gecko.driver=$TRAVIS_BUILD_DIR/cucumber-audit-scenarios/src/test/resources/geckodriver -Dwebdriver.chrome.driver=$TRAVIS_BUILD_DIR/cucumber-audit-stepdefs/src/test/resources/chromedriver
+  - mvn clean install -Dwebdriver.gecko.driver=$TRAVIS_BUILD_DIR/webdrivers/geckodriver -Dwebdriver.chrome.driver=$TRAVIS_BUILD_DIR/webdrivers/chromedriver
   - mvn jacoco:report sonar:sonar -Dsonar.projectKey=multicatch_cucumber-audit
 
 before_deploy:
