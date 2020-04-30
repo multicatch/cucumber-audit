@@ -37,6 +37,14 @@
         <url>https://github.com/multicatch/cucumber-audit/</url>
     </scm>
 
+    <developers>
+        <developer>
+            <id>multicatch</id>
+            <name>Cezary Regec</name>
+            <email>cezaryre@email.com</email>
+        </developer>
+    </developers>
+
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <maven.compiler.source>1.8</maven.compiler.source>
