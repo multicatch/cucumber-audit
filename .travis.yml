@@ -36,8 +36,8 @@ script:
   - mvn clean install -Dwebdriver.gecko.driver=$TRAVIS_BUILD_DIR/webdrivers/geckodriver -Dwebdriver.chrome.driver=$TRAVIS_BUILD_DIR/webdrivers/chromedriver
   - mvn jacoco:report sonar:sonar -Dsonar.projectKey=multicatch_cucumber-audit
 
-before_deploy:
-  - git clone https://github.com/multicatch/multicatch.github.io.git || true
+after_script:
+  - git clone https://github.com/multicatch/multicatch.github.io.git
   - mkdir -p multicatch.github.io/cucumber-audit/$TRAVIS_BRANCH
   - cp -r cucumber-audit-scenarios/target/cucumber/cucumber-html-reports multicatch.github.io/cucumber-audit/$TRAVIS_BRANCH
 
