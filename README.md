@@ -35,7 +35,7 @@ Example:
 ```shell script
 java jar cucumber-audit-standalone.jar path/to/features \
   --glue io.github.multicatch.cucumber.audit \
-  --plugin pretty
+  --plugin pretty \
   --webdriver.type GECKO \
   --webdriver.gecko.driver path/to/geckodriver \
   --webdriver.headless true
