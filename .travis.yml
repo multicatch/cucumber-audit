@@ -37,7 +37,7 @@ script:
   - mvn jacoco:report sonar:sonar -Dsonar.projectKey=multicatch_cucumber-audit
 
 before_deploy:
-  - git clone https://github.com/multicatch/multicatch.github.io.git
+  - git clone https://github.com/multicatch/multicatch.github.io.git || true
   - mkdir -p multicatch.github.io/cucumber-audit/$TRAVIS_BRANCH
   - cp -r cucumber-audit-scenarios/target/cucumber/cucumber-html-reports multicatch.github.io/cucumber-audit/$TRAVIS_BRANCH
 
