@@ -18,8 +18,29 @@
         <module>cucumber-audit-standalone</module>
     </modules>
 
+    <name>cucumber-audit</name>
+    <description>Easy automated auditing with preconfigured step definitions.</description>
+
+    <url>https://github.com/multicatch/cucumber-audit</url>
+    <inceptionYear>2020</inceptionYear>
+    <licenses>
+        <license>
+            <name>MIT License</name>
+            <url>http://opensource.org/licenses/MIT</url>
+            <distribution>repo</distribution>
+        </license>
+    </licenses>
+
+    <scm>
+        <connection>scm:git:git@github.com:multicatch/cucumber-audit</connection>
+        <developerConnection>scm:git:git@github.com:multicatch/cucumber-audit.git</developerConnection>
+        <url>https://github.com/multicatch/cucumber-audit/</url>
+    </scm>
+
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+        <maven.compiler.source>1.8</maven.compiler.source>
+        <maven.compiler.target>1.8</maven.compiler.target>
         <kotlin.version>1.3.70</kotlin.version>
         <selenium.version>4.0.0-alpha-3</selenium.version>
         <browsermob.version>2.1.5</browsermob.version>
