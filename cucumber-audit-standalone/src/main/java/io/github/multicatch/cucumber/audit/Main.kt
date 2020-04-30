@@ -7,14 +7,11 @@ import io.cucumber.core.options.CucumberPropertiesParser
 import io.cucumber.core.options.RuntimeOptions
 import io.cucumber.core.plugin.PluginFactory
 import io.cucumber.core.plugin.Plugins
-import org.openqa.selenium.chrome.ChromeDriverService
-import org.openqa.selenium.firefox.FirefoxDriverService
 import java.util.*
 import kotlin.system.exitProcess
 
 fun main(vararg argv: String) {
     val exitStatus = runFeatures(argv, Thread.currentThread().contextClassLoader)
-    registerDrivers()
     exitProcess(exitStatus.toInt())
 }
 
@@ -58,9 +55,4 @@ fun runFeatures(arguments: Array<out String>, classLoader: ClassLoader): Byte {
     runtime.run()
     AuditContextProvider.auditContext.driver.quit()
     return runtime.exitStatus()
-}
-
-fun registerDrivers() {
-    ServiceLoader.load(FirefoxDriverService.Builder::class.java)
-    ServiceLoader.load(ChromeDriverService.Builder::class.java)
 }
