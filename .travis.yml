@@ -26,7 +26,7 @@ cache:
 
 before_script:
   - git fetch origin +refs/heads/master:refs/remotes/origin/master
-  - ./download_drivers.sh
+  - chmod u+x ./download_drivers.sh && ./download_drivers.sh
 
 script:
   - mvn clean install -Dwebdriver.gecko.driver=$TRAVIS_BUILD_DIR/webdrivers/geckodriver -Dwebdriver.chrome.driver=$TRAVIS_BUILD_DIR/webdrivers/chromedriver
