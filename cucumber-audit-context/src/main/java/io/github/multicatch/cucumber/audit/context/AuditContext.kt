@@ -8,7 +8,12 @@ interface AuditContext {
     val proxy: BrowserMobProxy
     val driver: RemoteWebDriver
 
+    val requestSettings: RequestSettings
+}
+
+interface RequestSettings {
     var method: HttpMethod?
+    var request: String?
     var headers: MutableMap<String, String>
 }
 

@@ -11,10 +11,6 @@
 
     <artifactId>cucumber-audit-context</artifactId>
 
-    <properties>
-        <sonar.coverage.exclusions>**/cucumber/audit/context/DefaultAuditContext.kt</sonar.coverage.exclusions>
-    </properties>
-
 
     <dependencies>
         <dependency>

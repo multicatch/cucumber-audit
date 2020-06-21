@@ -64,6 +64,20 @@ class ResponseInspectionStepDefs @Inject constructor(
                     }
         }
 
+        Then("the response code should be {int}") { code: Int ->
+            auditContext.proxy.har
+                    .log
+                    .entries
+                    .mapNotNull { entry ->
+                        entry.response.status
+                    }
+                    .also { statuses ->
+                        Assertions.assertThat(statuses)
+                                .contains(code)
+                    }
+
+        }
+
         Then("the response should not match {string}") { regex: String ->
             auditContext.proxy.har
                     .log

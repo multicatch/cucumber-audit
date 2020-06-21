@@ -12,8 +12,9 @@ class NavigationStepDefs @Inject constructor(
 
     init {
         Before { _: Scenario ->
-            auditContext.method = null
-            auditContext.headers.clear()
+            auditContext.requestSettings.method = null
+            auditContext.requestSettings.request = null
+            auditContext.requestSettings.headers.clear()
         }
 
         Given("cookies are cleared") {
@@ -29,11 +30,15 @@ class NavigationStepDefs @Inject constructor(
         }
 
         When("I use a {string} HTTP method") { method: String ->
-            auditContext.method = HttpMethod.valueOf(method)
+            auditContext.requestSettings.method = HttpMethod.valueOf(method)
         }
 
         When("I add a {string} header with value {string}") { header: String, value: String ->
-            auditContext.headers[header] = value
+            auditContext.requestSettings.headers[header] = value
+        }
+
+        When("the request body is {string}") { body: String ->
+            auditContext.requestSettings.request = body
         }
 
         When("I make a request to {string}") { url: String ->

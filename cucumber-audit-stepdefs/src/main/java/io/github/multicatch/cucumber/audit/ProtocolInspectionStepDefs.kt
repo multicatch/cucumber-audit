@@ -8,7 +8,6 @@ import java.net.URLConnection
 import javax.inject.Inject
 import javax.net.ssl.HttpsURLConnection
 
-
 class ProtocolInspectionStepDefs @Inject constructor(
         private val auditContext: AuditContext
 ) : En {
