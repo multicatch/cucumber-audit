@@ -6,7 +6,7 @@
 
     <groupId>io.github.multicatch</groupId>
     <artifactId>cucumber-audit</artifactId>
-    <version>1.0-SNAPSHOT</version>
+    <version>1.0.0</version>
     <modules>
         <module>cucumber-audit-common</module>
         <module>cucumber-audit-context</module>
