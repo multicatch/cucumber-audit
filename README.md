@@ -16,6 +16,10 @@ This project aims to provide an easy way for configuring an automated audit or w
 * use variable substitution in feature files
 * manipulate or inspect HTTP requests and responses thanks to [browsermob-proxy](https://github.com/lightbody/browsermob-proxy)
 
+## Full documentation
+
+[Available here](doc/README.md)
+
 ## Sample scenarios
 
 Available [here](cucumber-audit-scenarios/src/main/resources/io/github/multicatch/cucumber/audit).

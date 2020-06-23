@@ -1,6 +1,6 @@
 # cucumber-audit documentation
 
-* [Getting Started](doc/GettingStarted.md)
+* [Getting Started](GettingStarted.md)
 * Predefined Steps
 * Variable Substitution
 
@@ -28,3 +28,40 @@ It can be even used for a quick setup of integration tests.
 
 You just need English. Scenarios are written in Gherking, which
 is just as simple as using English. See the predefined steps for reference.
+
+## Project Modules
+
+### cucumber-audit-context
+
+This module contains the configuration of browser drivers and proxy. 
+It is used to configure a context for tests and control the communication between the client (a browser) and the tested application.
+
+### cucumber-audit-junit
+
+This module adapts the cucumber-audit to be used with JUnit. 
+It also enables support for Cucumber and cucumber-audit plugins in tests.
+
+### cucumber-audit-plugins
+
+In this module there is an API for custom plugins that will be used during test execution.
+
+### cucumber-audit-stepdefs
+
+This module contains the standard *step definitions* of cucumber-audit. 
+Using this module allows to use a predefined steps to build custom scenarios.
+
+### cucumber-audit-variables
+
+This is a plugin that allows to use variables read from configuration file or environment in scenario definition.
+
+### cucumber-audit-scenarios
+
+A set of sample scenarios that can be reused thanks to variable substitution in scenarios.
+
+### cucumber-audit-standalone
+
+This module contains the configuration to build a standalone cucumber-audit jar.
+
+### cucumber-audit-common
+
+This module contains helper functions and models that can be used by any module in this project.
