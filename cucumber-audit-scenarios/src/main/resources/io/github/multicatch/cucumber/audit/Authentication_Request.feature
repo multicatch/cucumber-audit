@@ -3,7 +3,7 @@ Feature: Authentication Request Threats
   Background:
     Given only whitelisted traffic is allowed
     And traffic matching "$allowed_traffic_regex" is allowed
-    And app under "$heartbeat_url" has already started
+    And app running on "$heartbeat_url" has already started
 
   @Tampering
   Scenario: Confidential Data Eavesdropping

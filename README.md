@@ -28,12 +28,12 @@ mvn test -DfailIfNoTests=false -Dtest=CucumberTest -Dwebdriver.gecko.driver=/pat
 
 ## Running it standalone
 
-You can run it standalone using jar build in cucumber-audit-standalone module
+You can run it standalone using jar build in cucumber-audit-standalone module.
 
 Example:
 
 ```shell script
-java jar cucumber-audit-standalone.jar path/to/features \
+java -jar cucumber-audit-standalone.jar path/to/features \
   --glue io.github.multicatch.cucumber.audit \
   --plugin pretty \
   --webdriver.type GECKO \

@@ -11,7 +11,7 @@ class DiagnosticStepDefs : En {
     private val logger = LoggerFactory.getLogger(DiagnosticStepDefs::class.java)
 
     init {
-        Given("app under {string} has already started") { address: String ->
+        Given("app running on {string} has already started") { address: String ->
             val url = URL(address)
             val interval: Long = 1000
             var tries = 0

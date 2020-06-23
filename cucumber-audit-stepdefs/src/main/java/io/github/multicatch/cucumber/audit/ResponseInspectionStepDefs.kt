@@ -64,6 +64,19 @@ class ResponseInspectionStepDefs @Inject constructor(
                     }
         }
 
+        Then("the response should contain {string}") { value: String ->
+            auditContext.proxy.har
+                    .log
+                    .entries
+                    .mapNotNull { entry ->
+                        entry.response.content.text
+                    }
+                    .also { contents ->
+                        Assertions.assertThat(contents)
+                                .anyMatch { it.contains(value) }
+                    }
+        }
+
         Then("the response code should be {int}") { code: Int ->
             auditContext.proxy.har
                     .log
@@ -78,6 +91,20 @@ class ResponseInspectionStepDefs @Inject constructor(
 
         }
 
+        Then("the response code should not be {int}") { code: Int ->
+            auditContext.proxy.har
+                    .log
+                    .entries
+                    .mapNotNull { entry ->
+                        entry.response.status
+                    }
+                    .also { statuses ->
+                        Assertions.assertThat(statuses)
+                                .doesNotContain(code)
+                    }
+
+        }
+
         Then("the response should not match {string}") { regex: String ->
             auditContext.proxy.har
                     .log
@@ -88,6 +115,19 @@ class ResponseInspectionStepDefs @Inject constructor(
                     .also { contents ->
                         Assertions.assertThat(contents)
                                 .noneMatch { it.contains(Regex(regex)) }
+                    }
+        }
+
+        Then("the response should match {string}") { regex: String ->
+            auditContext.proxy.har
+                    .log
+                    .entries
+                    .mapNotNull { entry ->
+                        entry.response.content.text
+                    }
+                    .also { contents ->
+                        Assertions.assertThat(contents)
+                                .anyMatch { it.contains(Regex(regex)) }
                     }
         }
 
