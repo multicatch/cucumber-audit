@@ -1,7 +1,7 @@
 # cucumber-audit documentation
 
 * [Getting Started](GettingStarted.md)
-* Predefined Steps
+* [Predefined Steps](PredefinedSteps.md)
 * Variable Substitution
 
 ## FAQ
@@ -10,7 +10,7 @@
 
 This tool is used for building custom automated auditing scenarios
 using predefined or custom steps. The heart of this tool is Cucumber, 
-which provides Gherking and reports that can be used as a security audit report.
+which provides Gherkin and reports that can be used as a security audit report.
 
 ### Where can it be used?
 

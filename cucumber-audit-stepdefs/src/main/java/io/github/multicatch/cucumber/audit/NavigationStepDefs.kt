@@ -43,6 +43,9 @@ class NavigationStepDefs @Inject constructor(
 
         When("I make a request to {string}") { url: String ->
             auditContext.driver.get(url)
+            auditContext.requestSettings.method = null
+            auditContext.requestSettings.headers.clear()
+            auditContext.requestSettings.request = null
         }
     }
 }

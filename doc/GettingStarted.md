@@ -284,7 +284,7 @@ class CucumberAuditTest {
 ```
 
 **Notice** These steps need an injected *AuditContext*. You will need to configure a dependency injection
-framework (like Guice) with Cucumber. See the Cucumber documentation for more info.
+framework (like Guice) with Cucumber. See the [Cucumber documentation](https://cucumber.io/docs/cucumber/state/) for more info.
 
 To configure Guice in your tests, first add the following dependencies:
 ```xml
