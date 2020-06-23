@@ -16,11 +16,42 @@ This project aims to provide an easy way for configuring an automated audit or w
 * use variable substitution in feature files
 * manipulate or inspect HTTP requests and responses thanks to [browsermob-proxy](https://github.com/lightbody/browsermob-proxy)
 
-## Full documentation
+## Full Documentation
 
 [Available here](doc/README.md)
 
-## Sample scenarios
+## Sample Scenario
+
+By using predefined steps from this project, you can build a feature like the following:
+
+```gherkin
+Feature: Example Feature
+
+  Scenario: An Expected Response
+    Given app running on "https://httpbin.org" has already started
+    And the response content is under inspection
+    When I go to "https://httpbin.org"
+    Then the response should contain "A simple HTTP Request &amp; Response Service."
+```
+
+Feel free to extend it with more steps, comments or annotations:
+
+```gherkin
+Feature: Server Response Vulnerabilities
+
+  @InformationDisclosure
+  Scenario: Known Software Vulnerabilities Disclosure (Headers)
+  The "Server" and "X-Powered-By" headers provide information about technology that is used on the server side.
+  They usually contain the software version (eg. "Apache/2.2.15 (CentOS) ...") and can be used to find
+  known vulnerabilities of that software. Disabling them makes it more difficult to exploit the server software.
+
+    Given the response headers are under inspection
+    When I go to "$auth_application_url"
+    Then the "Server" response header should not contain numbers
+    And the "X-Powered-By" response header should not contain numbers
+```
+
+## Running Sample Scenarios
 
 Available [here](cucumber-audit-scenarios/src/main/resources/io/github/multicatch/cucumber/audit).
 
@@ -30,7 +61,7 @@ Download a Selenium Gecko driver and run the following in the project directory:
 mvn test -DfailIfNoTests=false -Dtest=CucumberTest -Dwebdriver.gecko.driver=/path/to/geckodriver
 ```
 
-## Running it standalone
+## Running It Standalone
 
 You can run it standalone using jar build in cucumber-audit-standalone module.
 
