@@ -36,6 +36,21 @@ class ResponseInspectionStepDefs @Inject constructor(
                     }
         }
 
+        Then("the {string} response header should not contain {string}") { header: String, value: String ->
+            auditContext.proxy.har
+                    .log
+                    .entries
+                    .mapNotNull { entry ->
+                        entry.response.headers
+                                .map { it.name to it.value }
+                                .toMap()[header]
+                    }
+                    .also { headers ->
+                        Assertions.assertThat(headers)
+                                .noneMatch { it.contains(value) }
+                    }
+        }
+
         Then("the {string} response header should not contain numbers") { header: String ->
             auditContext.proxy.har
                     .log
@@ -48,6 +63,36 @@ class ResponseInspectionStepDefs @Inject constructor(
                     .also { headers ->
                         Assertions.assertThat(headers)
                                 .noneMatch { it.contains(Regex("[0-9]+")) }
+                    }
+        }
+
+        Then("the {string} response header should match {string}") { header: String, expression: String ->
+            auditContext.proxy.har
+                    .log
+                    .entries
+                    .mapNotNull { entry ->
+                        entry.response.headers
+                                .map { it.name to it.value }
+                                .toMap()[header]
+                    }
+                    .also { headers ->
+                        Assertions.assertThat(headers)
+                                .anyMatch { it.contains(Regex(expression)) }
+                    }
+        }
+
+        Then("the {string} response header should not match {string}") { header: String, expression: String ->
+            auditContext.proxy.har
+                    .log
+                    .entries
+                    .mapNotNull { entry ->
+                        entry.response.headers
+                                .map { it.name to it.value }
+                                .toMap()[header]
+                    }
+                    .also { headers ->
+                        Assertions.assertThat(headers)
+                                .noneMatch { it.contains(Regex(expression)) }
                     }
         }
 
