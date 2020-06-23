@@ -9,8 +9,11 @@ interface VariableResolver {
             if (text == null) {
                 null
             } else {
-                Regex("""(?<!\\)${"\\$"}[a-zA-Z][a-zA-Z0-9_-]*""").replace(text) {
+                val resolved = Regex("""(?<!\\)${"\\$"}[a-zA-Z][a-zA-Z0-9_-]*""").replace(text) {
                     resolve(it.value.drop(1))
+                }
+                Regex("""\\${"\\$"}[a-zA-Z][a-zA-Z0-9_-]*""").replace(resolved) {
+                    it.value.drop(1)
                 }
             }
 

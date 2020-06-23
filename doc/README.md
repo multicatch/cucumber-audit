@@ -2,7 +2,7 @@
 
 * [Getting Started](GettingStarted.md)
 * [Predefined Steps](PredefinedSteps.md)
-* Variable Substitution
+* [Variable Substitution](VariableSubstitution.md)
 
 ## FAQ
 

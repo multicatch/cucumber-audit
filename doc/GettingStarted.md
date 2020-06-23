@@ -252,6 +252,23 @@ will manage the browser driver and the proxy. The first argument is the type of 
 the second argument is the location of the driver, and the third argument is used to specify whether to run
 the browser in a headless mode.
 
+Remember to define a teardown method that will stop the driver and kill the browser after the tests are done!
+
+```java
+@RunWith(CucumberAudit.class)
+@CucumberOptions(plugin = {
+    "pretty"
+}, strict = true)
+class CucumberAuditTest {
+    static AuditContext context = AuditContextKt.auditContextOf(DriverType.GECKO, "location/of/driver", true);
+
+    @AfterClass
+    public static void teardown() {
+        context.driver.quit();
+    }
+}
+```
+
 ### Using Predefined Steps
 
 To use predefined steps in your project, use the following Maven dependency:

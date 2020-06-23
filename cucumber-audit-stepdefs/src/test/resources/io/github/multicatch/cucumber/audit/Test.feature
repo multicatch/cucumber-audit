@@ -15,6 +15,7 @@ Feature: Step Definitions Test
     Then the "Content-Type" response header should contain "json"
     And the "Content-Type" response header should match ".*json"
     And the "Content-Type" response header should not contain numbers
+    And the "Content-Type" response header should not contain "SHOULD NOT BE PRESENT"
     And the "Content-Type" response header should not match "[0-9]+"
     And the response code should not be 404
     And the response should not contain "SHOULD NOT BE PRESENT"
