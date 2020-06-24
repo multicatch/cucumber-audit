@@ -43,12 +43,12 @@ class DocumentStepDefs @Inject constructor(
 
         Then("the document should match {string}") { expression: String ->
             val source = auditContext.driver.pageSource
-            Assertions.assertThat(source).containsPattern(expression)
+            Assertions.assertThat(source).matches(expression)
         }
 
         Then("the document should not match {string}") { expression: String ->
             val source = auditContext.driver.pageSource
-            Assertions.assertThat(source).doesNotContainPattern(expression)
+            Assertions.assertThat(source).doesNotMatch(expression)
         }
     }
 }

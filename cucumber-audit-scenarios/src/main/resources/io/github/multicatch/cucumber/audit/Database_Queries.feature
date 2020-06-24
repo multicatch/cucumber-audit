@@ -19,9 +19,9 @@ Feature: Database Queries Threats
     And the response should not contain "Exception"
     And the response should not contain "Stacktrace"
     And the response should not contain "Traceback"
-    And the response should not match "[a-zA-Z0-9.]+:[0-9]+\)"
-    And the response should not match "(?i)line [0-9]+"
-    And the response should not match "(?i)debug"
+    And the response should not match ".*[a-zA-Z0-9.]+:[0-9]+\).*"
+    And the response should not match "(?i).*line [0-9]+.*"
+    And the response should not match "(?i).*debug.*"
 
   @Tampering
   Scenario Outline: Unsafe Query Handling

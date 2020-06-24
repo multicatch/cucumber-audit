@@ -102,11 +102,11 @@ Checks whether a response header of a given name does not contain any numbers. N
 
 `the {string} response header should match {string}`
 
-Checks whether a response header of a given name contains a match to a given regular expression (Java style). Notice: This step will succeed when at least one match in all captured responses is found.
+Checks whether a response header of a given name matches a given regular expression (Java style). Notice: This step will succeed when at least one match in all captured responses is found.
 
 `the {string} response header should not match {string}`
 
-Checks whether a response header of a given name does not contain a match to a given regular expression (Java style). Notice: This step will fail when at least one match in all captured responses is found.
+Checks whether a response header of a given name does not match a given regular expression (Java style). Notice: This step will fail when at least one match in all captured responses is found.
 
 `the response content is under inspection`
 
@@ -124,11 +124,11 @@ Checks whether a response captured in proxy does not contain string. Notice: Thi
 
 `the response should match {string}`
 
-Checks whether a response captured in proxy contains a match to a regular expression (Java style). Notice: This step will succeed when at least one match in all captured responses is found.
+Checks whether a response captured in proxy matches a regular expression (Java style). Notice: This step will succeed when at least one match in all captured responses is found.
 
 `the response should not match {string}`
 
-Checks whether a response captured in proxy does not contain a match to a regular expression (Java style). Notice: This step will fail when at least one match in all captured responses is found.
+Checks whether a response captured in proxy does not match a regular expression (Java style). Notice: This step will fail when at least one match in all captured responses is found.
 
 `the response time should not be longer than {long} ms`
 
@@ -170,11 +170,11 @@ Checks whether the source code of a page does not contain a string. Notice: This
 
 `the document should match {string}`
 
-Checks whether the source code of a page contains a match to a given regular expression (Java style). Notice: This tests the response received by the browser, not the one captured by the proxy.
+Checks whether the source code of a page matches a given regular expression (Java style). Notice: This tests the response received by the browser, not the one captured by the proxy.
 
 `the document should not match {string}`
 
-Checks whether the source code of a page does not contain a match to a given regular expression (Java style). Notice: This tests the response received by the browser, not the one captured by the proxy.
+Checks whether the source code of a page does not match a given regular expression (Java style). Notice: This tests the response received by the browser, not the one captured by the proxy.
 
 ## Example Scenarios
 
