@@ -1,6 +1,6 @@
 # cucumber-audit
 
-[![Build Status](https://travis-ci.org/multicatch/cucumber-audit.svg)](https://travis-ci.org/multicatch/cucumber-audit) 
+[![Build Status](https://travis-ci.org/multicatch/cucumber-audit.svg?branch=develop)](https://travis-ci.org/multicatch/cucumber-audit) 
 [![Quality Gate Status](https://sonarcloud.io/api/project_badges/measure?project=multicatch_cucumber-audit&metric=alert_status)](https://sonarcloud.io/dashboard?id=multicatch_cucumber-audit)
 [![SonarCloud Coverage](https://sonarcloud.io/api/project_badges/measure?project=multicatch_cucumber-audit&metric=coverage)](https://sonarcloud.io/component_measures/metric/coverage/list?id=multicatch_cucumber-audit)
 
