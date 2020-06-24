@@ -77,7 +77,7 @@ class ResponseInspectionStepDefs @Inject constructor(
                     }
                     .also { headers ->
                         Assertions.assertThat(headers)
-                                .anyMatch { it.matches(Regex(expression)) }
+                                .anyMatch { it.matches(Regex(expression, RegexOption.DOT_MATCHES_ALL)) }
                     }
         }
 
@@ -92,7 +92,7 @@ class ResponseInspectionStepDefs @Inject constructor(
                     }
                     .also { headers ->
                         Assertions.assertThat(headers)
-                                .noneMatch { it.matches(Regex(expression)) }
+                                .noneMatch { it.matches(Regex(expression, RegexOption.DOT_MATCHES_ALL)) }
                     }
         }
 
@@ -159,7 +159,7 @@ class ResponseInspectionStepDefs @Inject constructor(
                     }
                     .also { contents ->
                         Assertions.assertThat(contents)
-                                .noneMatch { it.matches(Regex(regex)) }
+                                .noneMatch { it.matches(Regex(regex, RegexOption.DOT_MATCHES_ALL)) }
                     }
         }
 
@@ -172,7 +172,7 @@ class ResponseInspectionStepDefs @Inject constructor(
                     }
                     .also { contents ->
                         Assertions.assertThat(contents)
-                                .anyMatch { it.matches(Regex(regex)) }
+                                .anyMatch { it.matches(Regex(regex, RegexOption.DOT_MATCHES_ALL)) }
                     }
         }
 
