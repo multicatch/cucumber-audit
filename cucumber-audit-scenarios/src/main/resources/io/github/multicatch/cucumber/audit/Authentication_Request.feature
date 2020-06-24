@@ -5,18 +5,19 @@ Feature: Authentication Request Threats
     And traffic matching "$allowed_traffic_regex" is allowed
     And app running on "$heartbeat_url" has already started
 
-  @Tampering
+  @InformationDisclosure
   Scenario: Confidential Data Eavesdropping
-  HTTP communication is unencrypted and thus prone to altering via Man-in-The-Middle Attacks.
-  HTTPS is recommended so it prevents confidential data eavesdropping (such as passwords in requests)
-  and response altering.
+  HTTP communication is unencrypted and thus prone to eavesdropping via Man-in-The-Middle Attacks.
+  HTTPS is recommended for safe exchange of confidential information such as passwords or tokens.
 
     When I connect to "$auth_application_url"
     Then the connection should be secure
 
   @ElevationOfPrivilege
   Scenario: Hostile Linking
+  An authorization granted to the application should not be a stateless mechanism.
   An attacker can prepare a link that automatically authorizes the application without any user action.
+  The authorization should only be valid when done by the user.
 
     Given I go to "$client_application_url"
     And I click on "a.btn-primary"

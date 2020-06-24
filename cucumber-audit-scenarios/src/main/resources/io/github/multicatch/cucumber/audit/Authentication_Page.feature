@@ -6,9 +6,17 @@ Feature: Authentication Page Threats
     And app running on "$heartbeat_url" has already started in less than 30 s
 
   @Spoofing
-  Scenario: Session Hijacking (XSS)
-  The HttpOnly flag in "Set-Cookie" header disables the ability to access the cookie through JavaScript.
-  If an attacker successfully performs an XSS attack, the HttpOnly flag prevents from stealing the session cookie.
+  Scenario: Application Impersonation
+  The server certificate assures that the server is not an impersonated agent trying to deceive the user.
+  An attacker could use this vulnerability to steal sensitive data from the user or make them transfer money.
+
+    When I connect to "$auth_application_url"
+    Then the connection should be secure
+
+  @Spoofing
+  Scenario: Session Hijacking Through XSS
+  During an XSS attack, the session cookie could be stolen if it's accessible through JavaScript.
+  The attacker then could gain access to the user session and use their account to authorize in other applications.
 
     Given the response headers are under inspection
     And cookies are cleared
@@ -16,10 +24,10 @@ Feature: Authentication Page Threats
     Then the "Set-Cookie" response header should contain "HttpOnly"
 
   @InformationDisclosure
-  Scenario: Known Software Vulnerabilities Disclosure (Headers)
-  The "Server" and "X-Powered-By" headers provide information about technology that is used on the server side.
-  They usually contain the software version (eg. "Apache/2.2.15 (CentOS) ...") and can be used to find
-  known vulnerabilities of that software. Disabling them makes it more difficult to exploit the server software.
+  Scenario: Exploitation of System Software Information In Headers
+  The disclosure of software information may be used to provide knowledge about known vulnerabilities of
+  a particular version. The "Server" and "X-Powered-By" headers provide information about technology that
+  is used on the server side. Disabling them makes it more difficult to exploit the server software.
 
     Given the response headers are under inspection
     When I go to "$auth_application_url"
@@ -27,9 +35,9 @@ Feature: Authentication Page Threats
     And the "X-Powered-By" response header should not contain numbers
 
   @InformationDisclosure
-  Scenario Outline: Known Software Vulnerabilities Disclosure (Error Pages)
-  The default error pages can contain information about the server software. Usually this includes the version
-  of the software used. This piece of information can be used to find known vulnerabilities of that software.
+  Scenario Outline: Exploitation of Sensitive Information on Error Pages
+  The disclosure of software information may be used to provide knowledge about known vulnerabilities of
+  a particular version. The default error pages can contain information about the server software.
   Overriding default error pages makes it more difficult to exploit the server software.
 
     Given the response content is under inspection
@@ -45,10 +53,10 @@ Feature: Authentication Page Threats
       | HTTP Server |
 
   @InformationDisclosure
-  Scenario: System Architecture Disclosure (Error Pages)
-  Usually the server software prints stack traces on error by default. This is a debug feature that should be disabled
-  when running the software in production. The stack trace may provide information that can be used by an attacker,
-  eg. used libraries, algorithms or server software.
+  Scenario: Exploitation of System Architecture Information On Error Pages
+  Usually the server software prints stack traces on error by default. This is a debug feature that should be
+  disabled when running the software in production. The stack trace may provide information about architecture
+  and used libraries that can be used by an attacker to exploit known vulnerabilities.
 
     Given the response content is under inspection
     When I use a "POST" HTTP method
@@ -61,3 +69,11 @@ Feature: Authentication Page Threats
     And the response should not match ".*[a-zA-Z0-9.]+:[0-9]+\).*"
     And the response should not match "(?i).*line [0-9]+.*"
     And the response should not match "(?i).*debug.*"
+
+  @Tampering
+  Scenario: User Deception with Modified Responses
+  If the communication is unencrypted, there is a risk that an attacker could use a Man-in-The-Middle attack
+  to modify responses. They may use a modified page to make user think they authorize a different application.
+
+    When I connect to "$auth_application_url"
+    Then the connection should be secure

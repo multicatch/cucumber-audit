@@ -19,7 +19,7 @@ To use the predefined steps in a Java Project, add the following Maven dependenc
 The predefined steps need an injected `AuditContext`. 
 To get more info how to configure Dependency Injection in tests, see [Getting Started](GettingStarted.md).
 
-## Steps Provided With cucumber-audit
+## Steps Provided with cucumber-audit
 
 ### Diagnostic Steps
 

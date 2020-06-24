@@ -1,0 +1,967 @@
+{
+  "summary": {
+    "title": "Digital Identity System - exampleApp",
+    "owner": "Cezary Regec",
+    "description": "A digital identity system (OAuth 2.0) that manages user identity and authentication. The role of this system is to manage grants, applications that can get grants and users. It contains a login and authorization page and allows the application to retrieve an access and refresh token. Users can register and log in using this application, and also can use the identity from this application to authenticate in other third party applications.\n\nThis is a sample Django application made with django-oauth-toolkit - https://github.com/multicatch/django-example-oauth"
+  },
+  "detail": {
+    "contributors": [],
+    "diagrams": [
+      {
+        "title": "Authorization Code Grant",
+        "thumbnail": "./public/content/images/thumbnail.jpg",
+        "id": 0,
+        "$$hashKey": "object:61",
+        "diagramJson": {
+          "cells": [
+            {
+              "type": "tm.Actor",
+              "size": {
+                "width": 160,
+                "height": 80
+              },
+              "position": {
+                "x": 146,
+                "y": 48
+              },
+              "angle": 0,
+              "id": "d681f2fc-387f-4679-9a65-51b2d0d6df9a",
+              "z": 1,
+              "hasOpenThreats": false,
+              "attrs": {
+                ".element-shape": {
+                  "class": "element-shape hasNoOpenThreats isInScope"
+                },
+                "text": {
+                  "text": "Web Browser"
+                },
+                ".element-text": {
+                  "class": "element-text hasNoOpenThreats isInScope"
+                }
+              }
+            },
+            {
+              "type": "tm.Process",
+              "size": {
+                "width": 100,
+                "height": 100
+              },
+              "position": {
+                "x": 365,
+                "y": 219
+              },
+              "angle": 0,
+              "id": "1a004d4c-b0ac-4b5f-aad2-00f2e0991675",
+              "z": 3,
+              "hasOpenThreats": false,
+              "attrs": {
+                ".element-shape": {
+                  "class": "element-shape hasNoOpenThreats isInScope"
+                },
+                "text": {
+                  "text": "Identity\nProvider"
+                },
+                ".element-text": {
+                  "class": "element-text hasNoOpenThreats isInScope"
+                }
+              }
+            },
+            {
+              "type": "tm.Boundary",
+              "size": {
+                "width": 10,
+                "height": 10
+              },
+              "smooth": true,
+              "source": {
+                "x": 101,
+                "y": 209
+              },
+              "target": {
+                "x": 390,
+                "y": 17
+              },
+              "vertices": [
+                {
+                  "x": 328,
+                  "y": 170
+                }
+              ],
+              "id": "a2580f97-7100-475e-aff0-53230db9994a",
+              "z": 4,
+              "attrs": {}
+            },
+            {
+              "type": "tm.Flow",
+              "size": {
+                "width": 10,
+                "height": 10
+              },
+              "smooth": true,
+              "source": {
+                "x": 306,
+                "y": 139
+              },
+              "target": {
+                "x": 395,
+                "y": 215
+              },
+              "vertices": [
+                {
+                  "x": 353,
+                  "y": 171
+                }
+              ],
+              "id": "4d16fb74-1cfe-4e53-b8b8-6174aabd02fb",
+              "labels": [
+                {
+                  "position": 0.5,
+                  "attrs": {
+                    "text": {
+                      "text": "Authentication\nRequest",
+                      "font-weight": "400",
+                      "font-size": "small"
+                    }
+                  }
+                }
+              ],
+              "z": 5,
+              "hasOpenThreats": true,
+              "isEncrypted": false,
+              "protocol": "HTTP",
+              "threats": [
+                {
+                  "status": "Open",
+                  "severity": "Medium",
+                  "title": "Confidential Data Eavesdropping",
+                  "type": "Information disclosure",
+                  "description": "HTTP communication is unencrypted and thus prone to eavesdropping via Man-in-The-Middle Attacks. HTTPS is recommended for safe exchange of confidential information such as passwords or tokens.",
+                  "mitigation": "Obtain a trusted certficate and enable HTTPS communication.",
+                  "$$hashKey": "object:237"
+                },
+                {
+                  "status": "Mitigated",
+                  "severity": "Medium",
+                  "title": "Hostile Linking",
+                  "type": "Elevation of privilege",
+                  "description": "An authorization granted to the application should not be a stateless mechanism. An attacker can prepare a link that automatically authorizes the application without any user action. The authorization should only be valid when done by the user.",
+                  "mitigation": "Use a secret cookie (a CSRF token) that is generated when entering the page and is for one time use only.",
+                  "$$hashKey": "object:182"
+                }
+              ],
+              "attrs": {
+                ".marker-target": {
+                  "class": "marker-target hasOpenThreats isInScope"
+                },
+                ".connection": {
+                  "class": "connection hasOpenThreats isInScope"
+                }
+              }
+            },
+            {
+              "type": "tm.Flow",
+              "size": {
+                "width": 10,
+                "height": 10
+              },
+              "smooth": true,
+              "source": {
+                "x": 348,
+                "y": 252
+              },
+              "target": {
+                "x": 246,
+                "y": 147
+              },
+              "vertices": [
+                {
+                  "x": 285,
+                  "y": 209
+                }
+              ],
+              "id": "73450c80-2b04-44b7-8965-f2721f7805d8",
+              "labels": [
+                {
+                  "position": 0.5,
+                  "attrs": {
+                    "text": {
+                      "text": "Authentication Page",
+                      "font-weight": "400",
+                      "font-size": "small"
+                    }
+                  }
+                }
+              ],
+              "z": 6,
+              "hasOpenThreats": true,
+              "isEncrypted": false,
+              "protocol": "HTTP",
+              "threats": [
+                {
+                  "status": "Open",
+                  "severity": "Medium",
+                  "title": "Session Hijacking Through XSS",
+                  "type": "Spoofing",
+                  "description": "During an XSS attack, the session cookie could be stolen if it's accessible through JavaScript. The attacker then could gain access to the user session and use their account to authorize in other applications.",
+                  "mitigation": "The \"Set-Cookie\" header should contain the HttpOnly flag. The HttpOnly flag in \"Set-Cookie\" header disables the ability to access the cookie through JavaScript.",
+                  "$$hashKey": "object:203"
+                },
+                {
+                  "status": "Open",
+                  "severity": "Medium",
+                  "title": "Exploitation of System Software Information In Headers",
+                  "type": "Information disclosure",
+                  "description": "The disclosure of software information may be used to provide knowledge about known vulnerabilities of a particular version. The \"Server\" and \"X-Powered-By\" headers provide information about technology that is used on the server side. Disabling them makes it more difficult to exploit the server software.",
+                  "mitigation": "Disable software version information in \"Server\" and \"X-Powered-By\" headers in the server software.",
+                  "$$hashKey": "object:209"
+                },
+                {
+                  "status": "Open",
+                  "severity": "Medium",
+                  "title": "Exploitation of Sensitive Information On Error Pages",
+                  "type": "Information disclosure",
+                  "description": "The disclosure of software information may be used to provide knowledge about known vulnerabilities of a particular version.  The default error pages can contain information about the server software. Overriding default error pages makes it more difficult to exploit the server software.",
+                  "mitigation": "Override default error pages - use custom ones.",
+                  "$$hashKey": "object:343"
+                },
+                {
+                  "status": "Open",
+                  "severity": "Medium",
+                  "type": "Information disclosure",
+                  "title": "Exploitation of System Architecture Information On Error Pages",
+                  "description": "Usually the server software prints stack traces on error by default. This is a debug feature that should be disabled when running the software in production. The stack trace may provide information about architecture and used libraries that can be used by an attacker to exploit known vulnerabilities.",
+                  "mitigation": "Disable stack traces on errors; present a generic error page with error code instead.",
+                  "$$hashKey": "object:337"
+                },
+                {
+                  "status": "Open",
+                  "severity": "Medium",
+                  "title": "Application Impersonation",
+                  "type": "Spoofing",
+                  "description": "The server certificate assures that the server is not an impersonated agent trying to deceive the user. An attacker could use this vulnerability to steal sensitive data from the user or make them transfer money.",
+                  "$$hashKey": "object:100",
+                  "mitigation": "Obtain a trusted certficate and enable HTTPS communication."
+                },
+                {
+                  "status": "Open",
+                  "severity": "Medium",
+                  "title": "User Deception with Modified Responses",
+                  "type": "Tampering",
+                  "$$hashKey": "object:258",
+                  "description": "If the communication is unencrypted, there is a risk that an attacker could use a Man-in-The-Middle attack to modify responses. They may use a modified page to make user think they authorize a different application.",
+                  "mitigation": "Obtain a trusted certficate and enable HTTPS communication."
+                }
+              ],
+              "attrs": {
+                ".marker-target": {
+                  "class": "marker-target hasOpenThreats isInScope"
+                },
+                ".connection": {
+                  "class": "connection hasOpenThreats isInScope"
+                }
+              }
+            },
+            {
+              "type": "tm.Store",
+              "size": {
+                "width": 160,
+                "height": 80
+              },
+              "position": {
+                "x": 344,
+                "y": 429
+              },
+              "angle": 0,
+              "id": "3c18dbb4-5d26-4c74-beca-a7cc16165c18",
+              "z": 7,
+              "hasOpenThreats": false,
+              "attrs": {
+                ".element-shape": {
+                  "class": "element-shape hasNoOpenThreats isInScope"
+                },
+                "text": {
+                  "text": "Database"
+                },
+                ".element-text": {
+                  "class": "element-text hasNoOpenThreats isInScope"
+                }
+              }
+            },
+            {
+              "type": "tm.Store",
+              "size": {
+                "width": 160,
+                "height": 80
+              },
+              "position": {
+                "x": 91,
+                "y": 388
+              },
+              "angle": 0,
+              "id": "06930698-0efe-4462-9487-2d68fda0eebc",
+              "z": 8,
+              "hasOpenThreats": false,
+              "attrs": {
+                ".element-shape": {
+                  "class": "element-shape hasNoOpenThreats isInScope"
+                },
+                "text": {
+                  "text": "Session Storage"
+                },
+                ".element-text": {
+                  "class": "element-text hasNoOpenThreats isInScope"
+                }
+              }
+            },
+            {
+              "type": "tm.Boundary",
+              "size": {
+                "width": 10,
+                "height": 10
+              },
+              "smooth": true,
+              "source": {
+                "x": 556,
+                "y": 499
+              },
+              "target": {
+                "x": 290,
+                "y": 509
+              },
+              "vertices": [
+                {
+                  "x": 503,
+                  "y": 378
+                },
+                {
+                  "x": 328,
+                  "y": 404
+                }
+              ],
+              "id": "e3ca3398-1815-480f-9760-9820e08449b7",
+              "z": 9,
+              "attrs": {}
+            },
+            {
+              "type": "tm.Flow",
+              "size": {
+                "width": 10,
+                "height": 10
+              },
+              "smooth": true,
+              "source": {
+                "x": 392,
+                "y": 327
+              },
+              "target": {
+                "x": 396,
+                "y": 417
+              },
+              "vertices": [
+                {
+                  "x": 377,
+                  "y": 368
+                }
+              ],
+              "id": "3c98e95a-1486-4beb-a879-daf0e618b212",
+              "labels": [
+                {
+                  "position": 0.5,
+                  "attrs": {
+                    "text": {
+                      "text": "Queries",
+                      "font-weight": "400",
+                      "font-size": "small"
+                    }
+                  }
+                }
+              ],
+              "z": 10,
+              "hasOpenThreats": false,
+              "threats": [
+                {
+                  "status": "Mitigated",
+                  "severity": "High",
+                  "title": "Stealing Information From Database",
+                  "type": "Information disclosure",
+                  "description": "If the SQL Queries are creates by simple concatenation, there is a risk that an attacker could inject a malicious code into said queries. This SQL Injection can be used to obtain",
+                  "mitigation": "Use Prepared Statements or Stored Procedures to access and modify data in the database.",
+                  "$$hashKey": "object:163"
+                }
+              ],
+              "attrs": {
+                ".marker-target": {
+                  "class": "marker-target hasNoOpenThreats isInScope"
+                },
+                ".connection": {
+                  "class": "connection hasNoOpenThreats isInScope"
+                }
+              }
+            },
+            {
+              "type": "tm.Flow",
+              "size": {
+                "width": 10,
+                "height": 10
+              },
+              "smooth": true,
+              "source": {
+                "x": 472,
+                "y": 418
+              },
+              "target": {
+                "x": 454,
+                "y": 322
+              },
+              "vertices": [
+                {
+                  "x": 476,
+                  "y": 370
+                }
+              ],
+              "id": "20693a71-638b-419c-ba3c-1d6a8d2cd7a5",
+              "labels": [
+                {
+                  "position": 0.5,
+                  "attrs": {
+                    "text": {
+                      "text": "Query Results",
+                      "font-weight": "400",
+                      "font-size": "small"
+                    }
+                  }
+                }
+              ],
+              "z": 11,
+              "hasOpenThreats": false,
+              "threats": [
+                {
+                  "status": "Mitigated",
+                  "severity": "High",
+                  "title": "Exploitation of Database Management System Information",
+                  "type": "Information disclosure",
+                  "description": "Unhandled database errors may lead to disclosure about database system version. This may be used to prepare an attack that uses known system vulnerabilities and characteristics of used DBMS.",
+                  "mitigation": "Handle all database errors as application errors and hide detailed error messages.",
+                  "$$hashKey": "object:126"
+                }
+              ],
+              "attrs": {
+                ".marker-target": {
+                  "class": "marker-target hasNoOpenThreats isInScope"
+                },
+                ".connection": {
+                  "class": "connection hasNoOpenThreats isInScope"
+                }
+              }
+            },
+            {
+              "type": "tm.Flow",
+              "size": {
+                "width": 10,
+                "height": 10
+              },
+              "smooth": true,
+              "source": {
+                "x": 178,
+                "y": 373
+              },
+              "target": {
+                "x": 349,
+                "y": 288
+              },
+              "vertices": [
+                {
+                  "x": 245,
+                  "y": 312
+                }
+              ],
+              "id": "f5fa5677-05e5-451d-a7ff-48ad5a8012de",
+              "labels": [
+                {
+                  "position": 0.5,
+                  "attrs": {
+                    "text": {
+                      "text": "Read Session Data",
+                      "font-weight": "400",
+                      "font-size": "small"
+                    }
+                  }
+                }
+              ],
+              "z": 12,
+              "hasOpenThreats": false,
+              "outOfScope": true,
+              "reasonOutOfScope": "It represents an internal mechanism which is handled by a framework or language",
+              "attrs": {
+                ".marker-target": {
+                  "class": "marker-target hasNoOpenThreats isInScope"
+                },
+                ".connection": {
+                  "class": "connection hasNoOpenThreats isOutOfScope"
+                }
+              }
+            },
+            {
+              "type": "tm.Process",
+              "size": {
+                "width": 100,
+                "height": 100
+              },
+              "position": {
+                "x": 633,
+                "y": 242
+              },
+              "angle": 0,
+              "id": "f8dfc428-c5ae-4772-80ab-fd91718d9be8",
+              "z": 13,
+              "hasOpenThreats": false,
+              "attrs": {
+                ".element-shape": {
+                  "class": "element-shape hasNoOpenThreats isInScope"
+                },
+                "text": {
+                  "text": "Client\nApplication\nVerifier"
+                },
+                ".element-text": {
+                  "class": "element-text hasNoOpenThreats isInScope"
+                }
+              }
+            },
+            {
+              "type": "tm.Flow",
+              "size": {
+                "width": 10,
+                "height": 10
+              },
+              "smooth": true,
+              "source": {
+                "x": 469,
+                "y": 239
+              },
+              "target": {
+                "x": 623,
+                "y": 250
+              },
+              "vertices": [
+                {
+                  "x": 550,
+                  "y": 228
+                }
+              ],
+              "id": "598919bd-386d-4c44-8403-68014af24fae",
+              "labels": [
+                {
+                  "position": {
+                    "distance": 0.4974347350895806,
+                    "offset": 1.6900993309222747
+                  },
+                  "attrs": {
+                    "text": {
+                      "text": "Client App\nAuthentication",
+                      "font-weight": "400",
+                      "font-size": "small"
+                    }
+                  }
+                }
+              ],
+              "z": 14,
+              "hasOpenThreats": false,
+              "attrs": {
+                ".marker-target": {
+                  "class": "marker-target hasNoOpenThreats isInScope"
+                },
+                ".connection": {
+                  "class": "connection hasNoOpenThreats isInScope"
+                }
+              }
+            },
+            {
+              "type": "tm.Flow",
+              "size": {
+                "width": 10,
+                "height": 10
+              },
+              "smooth": true,
+              "source": {
+                "x": 614,
+                "y": 285
+              },
+              "target": {
+                "x": 475,
+                "y": 279
+              },
+              "vertices": [
+                {
+                  "x": 538,
+                  "y": 289
+                }
+              ],
+              "id": "f6639738-ed9d-4998-a69c-78f5185484a4",
+              "labels": [
+                {
+                  "position": {
+                    "distance": 0.519122910133086,
+                    "offset": -12.921199626889582
+                  },
+                  "attrs": {
+                    "text": {
+                      "text": "Client Validity And\nScopes",
+                      "font-weight": "400",
+                      "font-size": "small"
+                    }
+                  }
+                }
+              ],
+              "z": 15,
+              "hasOpenThreats": false,
+              "attrs": {
+                ".marker-target": {
+                  "class": "marker-target hasNoOpenThreats isInScope"
+                },
+                ".connection": {
+                  "class": "connection hasNoOpenThreats isInScope"
+                }
+              }
+            },
+            {
+              "type": "tm.Flow",
+              "size": {
+                "width": 10,
+                "height": 10
+              },
+              "smooth": true,
+              "source": {
+                "x": 632,
+                "y": 335
+              },
+              "target": {
+                "x": 526,
+                "y": 437
+              },
+              "vertices": [
+                {
+                  "x": 556,
+                  "y": 380
+                }
+              ],
+              "id": "ba7fd0ea-554e-4378-bba9-261701624c81",
+              "labels": [
+                {
+                  "position": 0.5,
+                  "attrs": {
+                    "text": {
+                      "text": "Queries",
+                      "font-weight": "400",
+                      "font-size": "small"
+                    }
+                  }
+                }
+              ],
+              "z": 16,
+              "hasOpenThreats": false,
+              "attrs": {
+                ".marker-target": {
+                  "class": "marker-target hasNoOpenThreats isInScope"
+                },
+                ".connection": {
+                  "class": "connection hasNoOpenThreats isInScope"
+                }
+              }
+            },
+            {
+              "type": "tm.Flow",
+              "size": {
+                "width": 10,
+                "height": 10
+              },
+              "smooth": true,
+              "source": {
+                "x": 544,
+                "y": 459
+              },
+              "target": {
+                "x": 669,
+                "y": 357
+              },
+              "vertices": [
+                {
+                  "x": 617,
+                  "y": 418
+                }
+              ],
+              "id": "70561eff-fe31-4292-bb4c-cb81c207e326",
+              "labels": [
+                {
+                  "position": 0.5,
+                  "attrs": {
+                    "text": {
+                      "text": "Query Results",
+                      "font-weight": "400",
+                      "font-size": "small"
+                    }
+                  }
+                }
+              ],
+              "z": 17,
+              "hasOpenThreats": false,
+              "attrs": {
+                ".marker-target": {
+                  "class": "marker-target hasNoOpenThreats isInScope"
+                },
+                ".connection": {
+                  "class": "connection hasNoOpenThreats isInScope"
+                }
+              }
+            },
+            {
+              "type": "tm.Actor",
+              "size": {
+                "width": 160,
+                "height": 80
+              },
+              "position": {
+                "x": 509,
+                "y": 16
+              },
+              "angle": 0,
+              "id": "6d38390b-957f-4f70-9f16-0f4353c3b79a",
+              "z": 18,
+              "hasOpenThreats": false,
+              "attrs": {
+                ".element-shape": {
+                  "class": "element-shape hasNoOpenThreats isInScope"
+                },
+                "text": {
+                  "text": "Client Application"
+                },
+                ".element-text": {
+                  "class": "element-text hasNoOpenThreats isInScope"
+                }
+              }
+            },
+            {
+              "type": "tm.Boundary",
+              "size": {
+                "width": 10,
+                "height": 10
+              },
+              "smooth": true,
+              "source": {
+                "x": 449,
+                "y": 29
+              },
+              "target": {
+                "x": 784,
+                "y": 161
+              },
+              "vertices": [
+                {
+                  "x": 507,
+                  "y": 145
+                }
+              ],
+              "id": "604ed5d1-0773-49de-88c8-f0ca68ca69ff",
+              "z": 19,
+              "attrs": {}
+            },
+            {
+              "type": "tm.Flow",
+              "size": {
+                "width": 10,
+                "height": 10
+              },
+              "smooth": true,
+              "source": {
+                "x": 564,
+                "y": 111
+              },
+              "target": {
+                "x": 460,
+                "y": 219
+              },
+              "vertices": [
+                {
+                  "x": 522,
+                  "y": 167
+                }
+              ],
+              "id": "2152c411-05fd-4ede-bb6c-20183598082f",
+              "labels": [
+                {
+                  "position": {
+                    "distance": 0.5434658925796308,
+                    "offset": -1.930413981924122
+                  },
+                  "attrs": {
+                    "text": {
+                      "text": "Token Request",
+                      "font-weight": "400",
+                      "font-size": "small"
+                    }
+                  }
+                }
+              ],
+              "z": 20,
+              "hasOpenThreats": false,
+              "attrs": {
+                ".marker-target": {
+                  "class": "marker-target hasNoOpenThreats isInScope"
+                },
+                ".connection": {
+                  "class": "connection hasNoOpenThreats isInScope"
+                }
+              }
+            },
+            {
+              "type": "tm.Flow",
+              "size": {
+                "width": 10,
+                "height": 10
+              },
+              "smooth": true,
+              "source": {
+                "x": 436,
+                "y": 203
+              },
+              "target": {
+                "x": 516,
+                "y": 106
+              },
+              "vertices": [
+                {
+                  "x": 463,
+                  "y": 140
+                }
+              ],
+              "id": "77596329-075d-431d-9c47-b9f33e3b25c8",
+              "labels": [
+                {
+                  "position": {
+                    "distance": 0.5096151864402306,
+                    "offset": -0.3999816566170236
+                  },
+                  "attrs": {
+                    "text": {
+                      "text": "Token Response",
+                      "font-weight": "400",
+                      "font-size": "small"
+                    }
+                  }
+                }
+              ],
+              "z": 21,
+              "hasOpenThreats": false,
+              "attrs": {
+                ".marker-target": {
+                  "class": "marker-target hasNoOpenThreats isInScope"
+                },
+                ".connection": {
+                  "class": "connection hasNoOpenThreats isInScope"
+                }
+              }
+            },
+            {
+              "type": "tm.Flow",
+              "size": {
+                "width": 10,
+                "height": 10
+              },
+              "smooth": true,
+              "source": {
+                "x": 319,
+                "y": 55
+              },
+              "target": {
+                "x": 500,
+                "y": 41
+              },
+              "vertices": [
+                {
+                  "x": 414,
+                  "y": 40
+                }
+              ],
+              "id": "ba620ab2-e20e-44e8-894e-1410156cbb04",
+              "labels": [
+                {
+                  "position": {
+                    "distance": 0.5278458473298917,
+                    "offset": -9.584631324659213
+                  },
+                  "attrs": {
+                    "text": {
+                      "text": "Web Request",
+                      "font-weight": "400",
+                      "font-size": "small"
+                    }
+                  }
+                }
+              ],
+              "z": 22,
+              "hasOpenThreats": false,
+              "outOfScope": true,
+              "reasonOutOfScope": "Internal Client Application Flow",
+              "attrs": {
+                ".marker-target": {
+                  "class": "marker-target hasNoOpenThreats isInScope"
+                },
+                ".connection": {
+                  "class": "connection hasNoOpenThreats isOutOfScope"
+                }
+              }
+            },
+            {
+              "type": "tm.Flow",
+              "size": {
+                "width": 10,
+                "height": 10
+              },
+              "smooth": true,
+              "source": {
+                "x": 495,
+                "y": 75
+              },
+              "target": {
+                "x": 325,
+                "y": 93
+              },
+              "vertices": [],
+              "id": "db736212-8676-4108-8cde-3fb0126a798b",
+              "labels": [
+                {
+                  "position": {
+                    "distance": 0.4401467645803664,
+                    "offset": -12.438331701380964
+                  },
+                  "attrs": {
+                    "text": {
+                      "text": "Web Response",
+                      "font-weight": "400",
+                      "font-size": "small"
+                    }
+                  }
+                }
+              ],
+              "z": 23,
+              "hasOpenThreats": false,
+              "outOfScope": true,
+              "reasonOutOfScope": "Internal Client Application Flow",
+              "attrs": {
+                ".marker-target": {
+                  "class": "marker-target hasNoOpenThreats isInScope"
+                },
+                ".connection": {
+                  "class": "connection hasNoOpenThreats isOutOfScope"
+                }
+              }
+            }
+          ]
+        },
+        "size": {
+          "height": 590,
+          "width": 794
+        }
+      }
+    ]
+  }
+}

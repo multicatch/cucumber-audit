@@ -3,6 +3,7 @@
 * [Getting Started](GettingStarted.md)
 * [Predefined Steps](PredefinedSteps.md)
 * [Variable Substitution](VariableSubstitution.md)
+* [Sample Threat Model](SampleThreadModel.md)
 
 ## FAQ
 

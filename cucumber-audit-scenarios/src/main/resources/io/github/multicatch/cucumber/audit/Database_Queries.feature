@@ -6,9 +6,9 @@ Feature: Database Queries Threats
     And app running on "$heartbeat_url" has already started
 
   @InformationDisclosure
-  Scenario: Known Database Vulnerabilities Disclosure
-  Unhandled database errors may lead to disclosure about database system version.
-  This may be used to prepare an attack that uses known system vulnerabilities.
+  Scenario: Exploitation of Database Management System Information
+  Unhandled database errors may lead to disclosure about database system version. This may be used to prepare
+  an attack that uses known system vulnerabilities and characteristics of used DBMS.
 
     Given I am on "$auth_application_url"
     And the response content is under inspection
@@ -23,10 +23,10 @@ Feature: Database Queries Threats
     And the response should not match "(?i).*line [0-9]+.*"
     And the response should not match "(?i).*debug.*"
 
-  @Tampering
-  Scenario Outline: Unsafe Query Handling
-  Creation of database queries by simply inserting parameters into a string pattern is an SQL Injection
-  vulnerability. An attacker can use form submit to access or alter information present in the database.
+  @InformationDisclosure
+  Scenario Outline: Stealing Information From Database
+  If the SQL Queries are creates by simple concatenation, there is a risk that an attacker could inject
+  a malicious code into said queries. This SQL Injection can be used to obtain
 
     Given I am on "$auth_application_url"
     And the response content is under inspection
