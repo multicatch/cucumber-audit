@@ -4,6 +4,7 @@
 * [Predefined Steps](PredefinedSteps.md)
 * [Variable Substitution](VariableSubstitution.md)
 * [Sample Threat Model](SampleThreadModel.md)
+* [Advanced Usage](AdvancedUsage.md)
 
 ## FAQ
 

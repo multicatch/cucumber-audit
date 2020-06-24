@@ -8,6 +8,7 @@ import io.cucumber.plugin.EventListener
 import io.cucumber.plugin.event.EventPublisher
 
 interface FeatureRedactor : EventListener {
+    @JvmDefault
     override fun setEventPublisher(publisher: EventPublisher) {
         // unused by cucumber-audit
     }

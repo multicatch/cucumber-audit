@@ -5,6 +5,7 @@ import io.github.multicatch.cucumber.audit.resourceFile
 import java.util.*
 
 interface VariableResolver {
+    @JvmDefault
     fun replace(text: String?): String? =
             if (text == null) {
                 null

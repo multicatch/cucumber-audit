@@ -53,9 +53,9 @@ Feature: Server Response Vulnerabilities
 
 ## Running Sample Scenarios
 
-Available [here](cucumber-audit-scenarios/src/main/resources/io/github/multicatch/cucumber/audit).
+The scenarios are available [here](cucumber-audit-scenarios/src/main/resources/io/github/multicatch/cucumber/audit).
 
-Download a Selenium Gecko driver and run the following in the project directory:
+Download a Selenium Gecko driver and run the following command in the project directory:
 
 ```shell script
 mvn test -DfailIfNoTests=false -Dtest=CucumberTest -Dwebdriver.gecko.driver=/path/to/geckodriver
@@ -76,7 +76,7 @@ java -jar cucumber-audit-standalone.jar path/to/features \
   --webdriver.headless true
 ```
 
-Instead of path/to/features provide a path to your *.feature files. 
+Instead of `path/to/features` provide a path to your `*.feature` files. 
 
 Other options:
 * `webdriver.type` - specify type of the webdriver used (GECKO/CHROME)
