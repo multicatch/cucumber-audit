@@ -21,7 +21,7 @@ Feature: Step Definitions Test
     And the response should not contain "SHOULD NOT BE PRESENT"
     And the response should not match "SHOULD NOT MATCH"
     And the response should contain "httpbin.org"
-    And the response should match "httpbin\.org"
+    And the response should match ".*httpbin\.org.*"
 
   Scenario: Document Inspection Steps
     When I go to "https://httpbin.org/"
@@ -29,5 +29,5 @@ Feature: Step Definitions Test
     And there should be element selected by "//html/body"
     And the document should contain "A simple HTTP Request &amp; Response Service."
     And the document should not contain "SHOULD NOT MATCH"
-    And the document should match "body"
+    And the document should match ".*body.*"
     And the document should not match "SHOULD NOT MATCH"

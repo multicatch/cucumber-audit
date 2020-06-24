@@ -3,7 +3,7 @@ Feature: Authentication Page Threats
   Background:
     Given only whitelisted traffic is allowed
     And traffic matching "$allowed_traffic_regex" is allowed
-    And app running on "$heartbeat_url" has already started
+    And app running on "$heartbeat_url" has already started in less than 30 s
 
   @Spoofing
   Scenario: Session Hijacking (XSS)

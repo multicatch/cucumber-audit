@@ -16,16 +16,13 @@ class DiagnosticStepDefs : En {
         }
 
         Given("app running on {string} has already started in less than {int} s") { address: String, maxTime: Int ->
-            if(!address.waitUntilAlive(maxTime)) {
-                Assertions.fail<Any>("Failed to connect to $address")
-            }
+            address.waitUntilAlive(timeout = maxTime * 1000)
         }
     }
 }
 
-fun String.waitUntilAlive(timeout: Int? = null): Boolean {
+fun String.waitUntilAlive(interval: Long = 1000, timeout: Int? = null) {
     val url = URL(this)
-    val interval: Long = 1000
     var tries = 0
     runBlocking {
         while(!url.isAlive()) {
@@ -33,7 +30,7 @@ fun String.waitUntilAlive(timeout: Int? = null): Boolean {
             if (tries % 10 == 0) {
                 logger.info("$this is still down after ${tries*interval/1000}s")
             }
-            if (timeout != null && tries / 10 >= timeout) {
+            if (timeout != null && tries * interval > timeout) {
                 break
             }
             delay(interval)
@@ -44,8 +41,8 @@ fun String.waitUntilAlive(timeout: Int? = null): Boolean {
         logger.debug("$this is up after ${tries*interval/1000}s wait")
     } else {
         logger.debug("$this is down after ${tries * interval / 1000}s wait")
+        Assertions.fail<Any>("Failed to connect to $this")
     }
-    return result
 }
 
 fun URL.isAlive(): Boolean {

@@ -28,6 +28,10 @@ To get more info how to configure Dependency Injection in tests, see [Getting St
 This steps tries to establish an HTTP connection with a given address and sends a GET request.
 The test will be stopped until a `200 OK` response is received. 
 
+`app running on {string} has already started in less than {int} s`
+
+This step is similar to the above, but fails if the connection has not been established in a given time.
+
 ### Whitelist Steps
 
 `only whitelisted traffic is allowed`

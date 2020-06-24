@@ -53,7 +53,7 @@ This **When** step triggers a HTTP connection that will be tested later.
 The last step is a **Then** step that makes an assertion that the connection should be secure. 
 It actually tests whether the connection is HTTPS and the certificate is trusted.
 
-One stage can contain many steps. They can be joined by using a conjunction like *And*, *Or* or *But*.
+One stage can contain many steps. They can be joined by using the following words: *And* or *But*.
 
 ```gherkin
 Feature: Example Feature
