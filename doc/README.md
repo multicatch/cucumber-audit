@@ -28,7 +28,7 @@ It can be even used for a quick setup of integration tests.
 
 ### Do I need to know Java/Kotlin to use this?
 
-You just need English. Scenarios are written in Gherking, which
+You just need English. Scenarios are written in Gherkin, which
 is just as simple as using English. See the predefined steps for reference.
 
 ## Project Modules

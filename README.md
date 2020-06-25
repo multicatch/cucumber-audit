@@ -37,13 +37,11 @@ Feature: Example Feature
 Feel free to extend it with more steps, comments or annotations:
 
 ```gherkin
-Feature: Server Response Vulnerabilities
-
   @InformationDisclosure
-  Scenario: Known Software Vulnerabilities Disclosure (Headers)
-  The "Server" and "X-Powered-By" headers provide information about technology that is used on the server side.
-  They usually contain the software version (eg. "Apache/2.2.15 (CentOS) ...") and can be used to find
-  known vulnerabilities of that software. Disabling them makes it more difficult to exploit the server software.
+  Scenario: Exploitation of System Software Information In Headers
+  The disclosure of software information may be used to provide knowledge about known vulnerabilities of
+  a particular version. The "Server" and "X-Powered-By" headers provide information about technology that
+  is used on the server side. Disabling them makes it more difficult to exploit the server software.
 
     Given the response headers are under inspection
     When I go to "$auth_application_url"
