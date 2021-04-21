@@ -13,7 +13,7 @@ wget "https://github.com/mozilla/geckodriver/releases/download/v0.26.0/geckodriv
 tar xzvf geckodriver-*.tar.gz
 
 # chromedriver
-MAJOR_CHROME_VERSION=$(chrome --version | grep -o "[0-9].*" | head -c2)
+MAJOR_CHROME_VERSION=$(google-chrome --version | grep -o "[0-9].*" | head -c2)
 CHROME_VERSION_LINK="https://chromedriver.storage.googleapis.com/LATEST_RELEASE_$MAJOR_CHROME_VERSION"
 CHROME_VERSION=$(curl $CHROME_VERSION_LINK)
 wget "https://chromedriver.storage.googleapis.com/$CHROME_VERSION/chromedriver_linux64.zip"
