@@ -256,9 +256,15 @@ Remember to define a teardown method that will stop the driver and kill the brow
 
 ```java
 @RunWith(CucumberAudit.class)
-@CucumberOptions(plugin = {
-    "pretty"
-}, strict = true)
+@CucumberOptions(
+    plugin = {
+        "pretty"
+    }, 
+    glue = {
+        "io.github.multicatch.cucumber.audit"
+    },
+    strict = true
+)
 class CucumberAuditTest {
     static AuditContext context = AuditContextKt.auditContextOf(DriverType.GECKO, "location/of/driver", true);
 
