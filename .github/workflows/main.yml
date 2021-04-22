@@ -28,7 +28,26 @@ jobs:
       - name: Download drivers for Selenium
         run: chmod u+x ./download_drivers.sh && ./download_drivers.sh
 
+      - name: Cache Maven packages
+        uses: actions/cache@v2
+        with:
+          path: ~/.m2
+          key: ${{ runner.os }}-m2-${{ hashFiles('**/pom.xml') }}
+          restore-keys: ${{ runner.os }}-m2
+
       - name: Build project
-        run: mvn clean install -Dwebdriver.gecko.driver=$GITHUB_WORKSPACE/webdrivers/geckodriver -Dwebdriver.chrome.driver=$GITHUB_WORKSPACE/webdrivers/chromedriver
+        run: mvn --batch-mode --update-snapshots clean install \
+          -Dwebdriver.gecko.driver=$GITHUB_WORKSPACE/webdrivers/geckodriver \
+          -Dwebdriver.chrome.driver=$GITHUB_WORKSPACE/webdrivers/chromedriver
         env:
           MOZ_HEADLESS: 1
+
+      - name: Sonar analysis
+        run: mvn --batch-mode jacoco:report sonar:sonar \
+          -Dsonar.projectKey=multicatch_cucumber-audit \
+          -Dsonar.organization=multicatch \
+          -Dsonar.host.url=https://sonarcloud.io \
+          -Dsonar.login=$SONAR_TOKEN
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
