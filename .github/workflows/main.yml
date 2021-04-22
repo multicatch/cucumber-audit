@@ -64,6 +64,11 @@ jobs:
 
   deploy_reports:
     name: Deploy Cucumber reports
+    if:
+      contains('
+      refs/heads/develop
+      refs/heads/master
+      ', github.ref)
     runs-on: ubuntu-latest
     needs: [ build ]
 
@@ -98,6 +103,11 @@ jobs:
 
   deploy_to_sonatype:
     name: Deploy to Sonatype repository
+    if:
+      contains('
+      refs/heads/develop
+      refs/heads/master
+      ', github.ref)
     runs-on: ubuntu-latest
     needs: [ build ]
 
