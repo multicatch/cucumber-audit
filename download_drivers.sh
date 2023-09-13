@@ -9,13 +9,14 @@ mkdir webdrivers
 cd webdrivers
 
 # geckodriver
-wget "https://github.com/mozilla/geckodriver/releases/download/v0.26.0/geckodriver-v0.26.0-linux64.tar.gz"
+wget "https://github.com/mozilla/geckodriver/releases/download/v0.33.0/geckodriver-v0.33.0-linux64.tar.gz"
 tar xzvf geckodriver-*.tar.gz
 
 # chromedriver
-MAJOR_CHROME_VERSION=$(google-chrome --version | grep -o "[0-9].*" | head -c2)
-CHROME_VERSION_LINK="https://chromedriver.storage.googleapis.com/LATEST_RELEASE_$MAJOR_CHROME_VERSION"
+MAJOR_CHROME_VERSION=$(google-chrome --version |  grep -Eo "[0-9]+" | head -n1)
+CHROME_VERSION_LINK="https://googlechromelabs.github.io/chrome-for-testing/LATEST_RELEASE_$MAJOR_CHROME_VERSION"
 CHROME_VERSION=$(curl $CHROME_VERSION_LINK)
-wget -q "https://chromedriver.storage.googleapis.com/$CHROME_VERSION/chromedriver_linux64.zip"
-unzip chromedriver_linux64.zip
+wget -q "https://edgedl.me.gvt1.com/edgedl/chrome/chrome-for-testing/$CHROME_VERSION/linux64/chromedriver-linux64.zip"
+unzip chromedriver-linux64.zip
+cp chromedriver-linux64/chromedriver ./
 cd ..

@@ -1,6 +1,7 @@
 package io.github.multicatch.cucumber.audit.plugins
 
 import io.cucumber.core.gherkin.StepType
+import io.cucumber.plugin.event.Location
 import org.junit.jupiter.api.Assertions.assertEquals
 import org.junit.jupiter.api.Test
 
@@ -11,19 +12,21 @@ class RedactedStepTest {
         val redactedStep = RedactedStep(
                 id = "test",
                 line = 1,
-                keyWord = "Given",
+                keyword = "Given",
                 stepType = StepType.GIVEN,
                 text = "it is a test",
                 argument = null,
-                previousKeyWord = null
+                previousKeyWord = null,
+                location = Location(1, 1)
         )
 
         assertEquals(redactedStep.id, "test")
         assertEquals(redactedStep.line, 1)
-        assertEquals(redactedStep.keyWord, "Given")
+        assertEquals(redactedStep.keyword, "Given")
         assertEquals(redactedStep.type, StepType.GIVEN)
         assertEquals(redactedStep.text, "it is a test")
         assertEquals(redactedStep.argument, null)
-        assertEquals(redactedStep.previousGivenWhenThenKeyWord, null)
+        assertEquals(redactedStep.previousGivenWhenThenKeyword, null)
+        assertEquals(redactedStep.location, Location(1, 1))
     }
 }
