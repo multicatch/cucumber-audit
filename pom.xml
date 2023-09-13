@@ -86,6 +86,21 @@
                 <version>${browsermob.version}</version>
             </dependency>
             <dependency>
+                <groupId>io.netty</groupId>
+                <artifactId>netty-all</artifactId>
+                <version>4.1.97.Final</version>
+            </dependency>
+            <dependency>
+                <groupId>io.netty</groupId>
+                <artifactId>netty-handler</artifactId>
+                <version>4.1.97.Final</version>
+            </dependency>
+            <dependency>
+                <groupId>org.bouncycastle</groupId>
+                <artifactId>bcpkix-jdk15on</artifactId>
+                <version>1.67</version>
+            </dependency>
+            <dependency>
                 <groupId>io.cucumber</groupId>
                 <artifactId>cucumber-java8</artifactId>
                 <version>${cucumber.version}</version>

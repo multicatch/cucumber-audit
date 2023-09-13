@@ -16,6 +16,12 @@
             <groupId>io.github.multicatch</groupId>
             <artifactId>cucumber-audit-stepdefs</artifactId>
             <version>${project.version}</version>
+            <exclusions>
+                <exclusion>
+                    <artifactId>bcprov-jdk15on</artifactId>
+                    <groupId>org.bouncycastle</groupId>
+                </exclusion>
+            </exclusions>
         </dependency>
         <dependency>
             <groupId>io.github.multicatch</groupId>
