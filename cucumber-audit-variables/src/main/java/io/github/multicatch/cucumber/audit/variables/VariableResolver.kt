@@ -28,7 +28,9 @@ object VariableResolverFactory {
             System.getenv().forEach { (key, value) ->
                 setProperty(key, value)
             }
-            load(CUCUMBER_PROPERTIES_FILE_NAME.resourceFile()!!.inputStream())
+            CUCUMBER_PROPERTIES_FILE_NAME.resourceFile()?.inputStream()?.also {
+                load(it)
+            }
         }
 
         val resolverClass = options.getProperty("audit.variable_resolver", PropertyVariableResolver::class.java.canonicalName)

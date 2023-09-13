@@ -3,7 +3,8 @@ package io.github.multicatch.cucumber.audit
 import io.github.multicatch.cucumber.audit.context.AuditContext
 import io.github.multicatch.cucumber.audit.context.DriverType
 import io.github.multicatch.cucumber.audit.context.auditContextOf
-import javax.inject.Provider
+import jakarta.inject.Provider
+import java.util.*
 
 object AuditContextProvider : Provider<AuditContext> {
     lateinit var auditContext: AuditContext
@@ -18,7 +19,7 @@ fun Array<out String>.setupAuditContext(options: Map<String, String>) {
     val literalType = CONTEXT_DRIVER_TYPE.from(this, options)
             ?: error("""Please provide webdriver type with "$CONTEXT_DRIVER_TYPE" option.""")
 
-    val type = DriverType.valueOf(literalType.toUpperCase())
+    val type = DriverType.valueOf(literalType.uppercase(Locale.getDefault()))
 
     val location = type.driverLocationProperty.from(this, options)
             ?: error("""Please provide webdriver location with "${type.driverLocationProperty}" option.""")

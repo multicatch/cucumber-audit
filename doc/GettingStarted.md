@@ -350,10 +350,9 @@ class CucumberTestModule extends AbstractModule {
 }
 ```
 
-In your `cucumber.properties` file you will need to specify the defined injector source:
+GuiceInjectorSource should be in the packages that are scanned for glue. 
+It is practically a glue class as seen by Cucumber. 
 
-```properties
-guice.injector-source=com.example.audit.GuiceInjectorSource
-```
+Cucumber should automatically detect new InjectorSource and use it.
 
 The tests should work now.
