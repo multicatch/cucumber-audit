@@ -18,4 +18,5 @@ CHROME_VERSION_LINK="https://googlechromelabs.github.io/chrome-for-testing/LATES
 CHROME_VERSION=$(curl $CHROME_VERSION_LINK)
 wget -q "https://edgedl.me.gvt1.com/edgedl/chrome/chrome-for-testing/$CHROME_VERSION/linux64/chromedriver-linux64.zip"
 unzip chromedriver-linux64.zip
+cp chromedriver-linux64/chromedriver ./
 cd ..
