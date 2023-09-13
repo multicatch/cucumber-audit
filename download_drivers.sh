@@ -17,5 +17,5 @@ MAJOR_CHROME_VERSION=$(google-chrome --version |  grep -Eo "[0-9]+" | head -n1)
 CHROME_VERSION_LINK="https://googlechromelabs.github.io/chrome-for-testing/LATEST_RELEASE_$MAJOR_CHROME_VERSION"
 CHROME_VERSION=$(curl $CHROME_VERSION_LINK)
 wget -q "https://edgedl.me.gvt1.com/edgedl/chrome/chrome-for-testing/$CHROME_VERSION/linux64/chromedriver-linux64.zip"
-unzip chromedriver_linux64.zip
+unzip chromedriver-linux64.zip
 cd ..
