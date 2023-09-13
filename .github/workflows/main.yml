@@ -22,4 +22,4 @@ jobs:
           echo $GPG_PASSPHRASE >> secrets.txt
 
       - name: Run tmate
-        uses: mxschmitt/action-tmate@v2
+        uses: mxschmitt/action-tmate@v3
