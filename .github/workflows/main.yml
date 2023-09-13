@@ -17,9 +17,7 @@ jobs:
           GPG_KEY_NAME: ${{ secrets.GPG_KEY_NAME }}
           GPG_PASSPHRASE: ${{ secrets.GPG_PASSPHRASE }}
         run: |
-          echo $GPG_SIGNINGKEY >> gpg.txt
-          echo $GPG_KEY_NAME >> secrets.txt
-          echo $GPG_PASSPHRASE >> secrets.txt
+          echo "$GPG_SIGNINGKEY" > deployment/signingkey.asc
+          echo "$GPG_PASSPHRASE" | gpg --batch --yes --no-tty --passphrase-fd 0 --fast-import deployment/signingkey.asc
+          gpg --list-secret-keys --keyid-format=long
 
-      - name: Run tmate
-        uses: mxschmitt/action-tmate@v3
