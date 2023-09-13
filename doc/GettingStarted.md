@@ -320,7 +320,7 @@ To configure Guice in your tests, first add the following dependencies:
         <dependency>
             <groupId>io.cucumber</groupId>
             <artifactId>cucumber-guice</artifactId>
-            <version>5.5.0</version>
+            <version>5.10.0</version>
             <scope>test</scope>
         </dependency>
 ```
