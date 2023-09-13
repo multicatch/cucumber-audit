@@ -45,17 +45,6 @@ jobs:
         env:
           MOZ_HEADLESS: 1
 
-      - name: Sonar analysis
-        run: |
-          mvn --batch-mode jacoco:report sonar:sonar \
-            -Dsonar.projectKey=multicatch_cucumber-audit \
-            -Dsonar.organization=multicatch \
-            -Dsonar.host.url=https://sonarcloud.io \
-            -Dsonar.login=$SONAR_TOKEN
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-          SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
-
       - name: Upload compiled files
         uses: actions/upload-artifact@v2
         with:
