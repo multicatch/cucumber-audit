@@ -32,12 +32,11 @@ fun runFeatures(arguments: Array<out String>, classLoader: ClassLoader): Byte {
             .parse(fromSystemProperties)
             .build(environmentOptions)
 
-    val runtimeOptions: RuntimeOptions = CommandlineOptionsParser()
-            .parse(arguments.withoutCucumberAuditOptions())
+    val runtimeOptions: RuntimeOptions = CommandlineOptionsParser(System.out)
+            .parse(*arguments.withoutCucumberAuditOptions().toTypedArray())
             .addDefaultGlueIfAbsent()
             .addDefaultFeaturePathIfAbsent()
-            .addDefaultFormatterIfAbsent()
-            .addDefaultSummaryPrinterIfAbsent()
+            .addDefaultSummaryPrinterIfNotDisabled()
             .build(systemOptions)
 
     arguments.setupAuditContext(fromPropertiesFile + fromEnvironment + fromSystemProperties)

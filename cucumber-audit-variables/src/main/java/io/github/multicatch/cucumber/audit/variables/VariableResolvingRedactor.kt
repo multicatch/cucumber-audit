@@ -13,7 +13,7 @@ open class VariableResolvingRedactor : FeatureRedactor {
         pickles.replaceAll { pickle ->
             pickle.apply {
                 steps.replaceAll {
-                    RedactedStep(it.id, it.line, it.keyWord, it.type, resolver.replace(it.text), it.argument, it.previousGivenWhenThenKeyWord)
+                    RedactedStep(it.id, it.line, it.keyword, it.type, resolver.replace(it.text), it.argument, it.previousGivenWhenThenKeyword, it.location)
                 }
             }
         }

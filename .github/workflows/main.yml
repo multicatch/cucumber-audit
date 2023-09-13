@@ -15,11 +15,11 @@ jobs:
 
     steps:
       - uses: actions/checkout@v2
-      - name: Set up JDK 1.8
-        uses: actions/setup-java@v1
+      - name: Set up JDK 17
+        uses: actions/setup-java@v3
         with:
-          distribution: 'adopt'
-          java-version: '11'
+          distribution: 'zulu'
+          java-version: '17'
 
       - name: Fetch all branches
         run: git fetch --unshallow && git fetch origin +refs/heads/master:refs/remotes/origin/master
@@ -44,6 +44,13 @@ jobs:
             -Dwebdriver.chrome.driver=$GITHUB_WORKSPACE/webdrivers/chromedriver
         env:
           MOZ_HEADLESS: 1
+
+      - name: Cache SonarCloud packages
+        uses: actions/cache@v3
+        with:
+          path: ~/.sonar/cache
+          key: ${{ runner.os }}-sonar
+          restore-keys: ${{ runner.os }}-sonar
 
       - name: Sonar analysis
         run: |
@@ -113,11 +120,11 @@ jobs:
     steps:
       - uses: actions/checkout@v2
 
-      - name: Set up JDK 1.8
-        uses: actions/setup-java@v1
+      - name: Set up JDK 17
+        uses: actions/setup-java@v3
         with:
-          distribution: 'adopt'
-          java-version: '11'
+          distribution: 'zulu'
+          java-version: '17'
 
       - name: Download compiled files
         uses: actions/download-artifact@v2

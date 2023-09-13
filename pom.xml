@@ -6,7 +6,7 @@
 
     <groupId>io.github.multicatch</groupId>
     <artifactId>cucumber-audit</artifactId>
-    <version>1.0.3</version>
+    <version>1.1.0</version>
     <modules>
         <module>cucumber-audit-common</module>
         <module>cucumber-audit-context</module>
@@ -49,16 +49,16 @@
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <maven.compiler.source>1.8</maven.compiler.source>
         <maven.compiler.target>1.8</maven.compiler.target>
-        <kotlin.version>1.4.30</kotlin.version>
-        <selenium.version>4.0.0-alpha-3</selenium.version>
+        <kotlin.version>1.8.10</kotlin.version>
+        <selenium.version>4.12.1</selenium.version>
         <browsermob.version>2.1.5</browsermob.version>
-        <cucumber.version>5.5.0</cucumber.version>
-        <junit.jupiter.version>5.6.0</junit.jupiter.version>
-        <assertj.version>3.15.0</assertj.version>
-        <guice.version>4.2.2</guice.version>
-        <kotlin.coroutines.version>1.4.3</kotlin.coroutines.version>
-        <slf4j.version>1.7.25</slf4j.version>
-        <jackson.version>2.12.1</jackson.version>
+        <cucumber.version>7.13.0</cucumber.version>
+        <junit.jupiter.version>5.10.0</junit.jupiter.version>
+        <assertj.version>3.24.2</assertj.version>
+        <guice.version>7.0.0</guice.version>
+        <kotlin.coroutines.version>1.7.3</kotlin.coroutines.version>
+        <slf4j.version>1.7.36</slf4j.version>
+        <jackson.version>2.15.2</jackson.version>
     </properties>
 
     <packaging>pom</packaging>
@@ -101,14 +101,19 @@
                 <version>${cucumber.version}</version>
             </dependency>
             <dependency>
+                <groupId>io.cucumber</groupId>
+                <artifactId>gherkin</artifactId>
+                <version>26.2.0</version>
+            </dependency>
+            <dependency>
+                <groupId>io.cucumber</groupId>
+                <artifactId>messages</artifactId>
+                <version>22.0.0</version>
+            </dependency>
+            <dependency>
                 <groupId>org.assertj</groupId>
                 <artifactId>assertj-core</artifactId>
                 <version>${assertj.version}</version>
-            </dependency>
-            <dependency>
-                <groupId>javax.inject</groupId>
-                <artifactId>javax.inject</artifactId>
-                <version>1</version>
             </dependency>
             <dependency>
                 <groupId>org.jetbrains.kotlinx</groupId>
@@ -123,7 +128,7 @@
             <dependency>
                 <groupId>ch.qos.logback</groupId>
                 <artifactId>logback-classic</artifactId>
-                <version>1.2.3</version>
+                <version>1.4.11</version>
                 <scope>test</scope>
             </dependency>
 
@@ -140,7 +145,7 @@
             <dependency>
                 <groupId>com.google.guava</groupId>
                 <artifactId>guava</artifactId>
-                <version>29.0-jre</version>
+                <version>32.1.2-jre</version>
             </dependency>
 
             <dependency>
@@ -159,7 +164,7 @@
             <dependency>
                 <groupId>de.monochromata.cucumber</groupId>
                 <artifactId>reporting-plugin</artifactId>
-                <version>4.0.42</version>
+                <version>4.0.103</version>
                 <scope>test</scope>
             </dependency>
             <dependency>
@@ -227,7 +232,7 @@
                 <plugin>
                     <groupId>org.apache.maven.plugins</groupId>
                     <artifactId>maven-source-plugin</artifactId>
-                    <version>3.2.0</version>
+                    <version>3.3.0</version>
                     <executions>
                         <execution>
                             <id>attach-sources</id>
@@ -240,7 +245,7 @@
                 <plugin>
                     <groupId>org.jetbrains.dokka</groupId>
                     <artifactId>dokka-maven-plugin</artifactId>
-                    <version>1.4.30</version>
+                    <version>1.9.0</version>
                     <executions>
                         <execution>
                             <phase>package</phase>
@@ -257,7 +262,7 @@
                 <plugin>
                     <groupId>org.jacoco</groupId>
                     <artifactId>jacoco-maven-plugin</artifactId>
-                    <version>0.8.4</version>
+                    <version>0.8.10</version>
                     <configuration>
                         <fileSets>
                             <fileSet>
@@ -301,7 +306,7 @@
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-surefire-plugin</artifactId>
-                <version>3.0.0-M4</version>
+                <version>3.1.2</version>
             </plugin>
             <plugin>
                 <groupId>org.jacoco</groupId>
@@ -318,7 +323,7 @@
                     <plugin>
                         <groupId>org.sonatype.plugins</groupId>
                         <artifactId>nexus-staging-maven-plugin</artifactId>
-                        <version>1.6.7</version>
+                        <version>1.6.13</version>
                         <extensions>true</extensions>
                         <configuration>
                             <serverId>ossrh</serverId>

@@ -5,7 +5,7 @@ import io.github.multicatch.cucumber.audit.context.AuditContext
 import org.assertj.core.api.Assertions
 import java.net.URL
 import java.net.URLConnection
-import javax.inject.Inject
+import jakarta.inject.Inject
 import javax.net.ssl.HttpsURLConnection
 
 class ProtocolInspectionStepDefs @Inject constructor(
