@@ -1,7 +1,7 @@
 package io.github.multicatch.cucumber.audit.context
 
 import io.netty.handler.codec.http.HttpMethod
-import net.lightbody.bmp.BrowserMobProxy
+import io.github.multicatch.bmp.BrowserMobProxy
 import org.openqa.selenium.remote.RemoteWebDriver
 
 interface AuditContext {

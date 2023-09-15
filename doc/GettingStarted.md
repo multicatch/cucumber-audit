@@ -314,13 +314,13 @@ To configure Guice in your tests, first add the following dependencies:
         <dependency>
             <groupId>com.google.inject</groupId>
             <artifactId>guice</artifactId>
-            <version>4.2.2</version>
+            <version>7.0.0</version>
             <scope>test</scope>
         </dependency>
         <dependency>
             <groupId>io.cucumber</groupId>
             <artifactId>cucumber-guice</artifactId>
-            <version>5.10.0</version>
+            <version>7.13.0</version>
             <scope>test</scope>
         </dependency>
 ```

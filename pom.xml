@@ -6,7 +6,7 @@
 
     <groupId>io.github.multicatch</groupId>
     <artifactId>cucumber-audit</artifactId>
-    <version>1.1.0</version>
+    <version>1.2.0</version>
     <modules>
         <module>cucumber-audit-common</module>
         <module>cucumber-audit-context</module>
@@ -51,7 +51,7 @@
         <maven.compiler.target>1.8</maven.compiler.target>
         <kotlin.version>1.8.10</kotlin.version>
         <selenium.version>4.12.1</selenium.version>
-        <browsermob.version>2.1.5</browsermob.version>
+        <browsermob.version>2.2.1</browsermob.version>
         <cucumber.version>7.13.0</cucumber.version>
         <junit.jupiter.version>5.10.0</junit.jupiter.version>
         <assertj.version>3.24.2</assertj.version>
@@ -81,7 +81,7 @@
                 <version>${selenium.version}</version>
             </dependency>
             <dependency>
-                <groupId>net.lightbody.bmp</groupId>
+                <groupId>io.github.multicatch</groupId>
                 <artifactId>browsermob-core</artifactId>
                 <version>${browsermob.version}</version>
             </dependency>

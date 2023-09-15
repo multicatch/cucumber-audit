@@ -2,7 +2,7 @@ package io.github.multicatch.cucumber.audit
 
 import io.cucumber.java8.En
 import io.github.multicatch.cucumber.audit.context.AuditContext
-import net.lightbody.bmp.proxy.CaptureType
+import io.github.multicatch.bmp.proxy.CaptureType
 import org.assertj.core.api.Assertions
 import jakarta.inject.Inject
 

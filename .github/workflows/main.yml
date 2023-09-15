@@ -98,7 +98,7 @@ jobs:
             multicatch.github.io/cucumber-audit/${GITHUB_REF##*/}
 
       - name: Deploy to GitHub Pages
-        uses: crazy-max/ghaction-github-pages@v2
+        uses: crazy-max/ghaction-github-pages@v4
         with:
           repo: multicatch/multicatch.github.io
           target_branch: master
